@@ -16,21 +16,25 @@
             appKey: "KA6pShPTmYEhxNWRulVHYcrF",
             serverURLs: "https://nfptnwam.lc-cn-n1-shared.com"
         });
-        //create data base
-        var TestObject = AV.Object.extend('Playlist');
-        //create a test object
-        var testObject = new TestObject();
-        //insert a record
-        testObject.set({
-            name: 'test',
-            cover: 'test',
-            creatorId: 'test',
-            description:'test',
-            songs:['1','2']
-        });
-        testObject.save().then(function (testObject) {
-            console.log('保存成功。')
-        })
+        // //create data base
+        // var TestObject = AV.Object.extend('Playlist');
+        // //create a test object
+        // var testObject = new TestObject();
+        // //insert a record
+        // testObject.set({
+        //     name: 'test',
+        //     cover: 'test',
+        //     creatorId: 'test',
+        //     description:'test',
+        //     songs:['1','2']
+        // });
+        // testObject.save().then(function (testObject) {
+        //     console.log('保存成功。')
+        // })
+    </script>
+    <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
+    <script>
+        console.log(qiniu)
     </script>
 </body>
 </html>

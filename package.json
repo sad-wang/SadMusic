@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "leancloud-storage": "^4.2.0"
+    "leancloud-storage": "^4.2.0",
+    "qiniu-js": "^2.5.5"
   }
 }
