@@ -8,15 +8,25 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data" id="form" action="upload">
-        <div id="box">
-            <button class="select-button">选择文件</button>
-            <input class="file-input" type="file" id="select" />
+    <form method="post" enctype="multipart/form-data" id="form" >
+        <div id="box" >
+            <input class="file-input" name="selected" type="file" id="selected" />
         </div>
     </form>
+    <div class="nav-box" style="margin-top:30px">
+        <ul id="myTab" class="nav nav-tabs">
+            <li role="presentation" class="active">
+                <button  id="h5" data-toggle="tab">
+                    七牛h5上传
+                </button>
+            </li>
+        </ul>
+    </div>
+
     <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script>
-        console.log(window.AV)
+
         AV.init({
             appId: "NfptNwamDHA9VDTGMiSaSAFy-gzGzoHsz",
             appKey: "KA6pShPTmYEhxNWRulVHYcrF",
@@ -37,28 +47,48 @@
         // testObject.save().then(function (testObject) {
         //     console.log('保存成功。')
         // })
-        var file
-        var key
-        var token
-        var putExtra = {
-            fname: "",
-            params: {},
-            mimeType: null
-        };
-        var config = {
-            useCdnDomain: true,
-            region: null
-        };
-        var observable = qiniu.upload(file, key, token, putExtra, config)
+        $.ajax({url: "http://192.168.0.108:9000/uptoken", success: function(res){
+                var token = JSON.parse(res).uptoken
+                var domain = 'q4nj29ews.bkt.clouddn.com'
+                var config = {
+                    useCdnDomain: true,
+                    disableStatisticsReport: false,
+                    retryCount: 6,
+                    region: null
+                };
+                var putExtra = {
+                    fname: "",
+                    params: {},
+                    mimeType: null
+                };
+                console.log(JSON.parse(res).uptoken)
+                var uploadWithSDK = function () {
+                    var subscription
+                    var observable
+                    var observer = {
+                        next(res){
+                            // ...
+                        },
+                        error(err){
+                            // ...
+                        },
+                        complete(res){
+                            // ...
+                        }
+                    }
+                    var file = document.querySelector('#selected').files[0]
+                    var key = file.name
+                    observable = qiniu.upload(file, key, token, putExtra, config)
+                    subscription = observable.subscribe(observer)
+                    console.log(111)
+                }
+                $('#h5').click(uploadWithSDK);
 
-        var subscription = observable.subscribe(observer) // 上传开始
-
-        subscription.unsubscribe() // 上传取消
-
+            }})
     </script>
     <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
     <script>
-        console.log(qiniu)
+
     </script>
 </body>
 </html>

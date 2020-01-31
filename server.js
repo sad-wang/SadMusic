@@ -35,11 +35,7 @@ var server = http.createServer(function(request, response){
         var putPolicy = new qiniu.rs.PutPolicy(options);
         var uploadToken=putPolicy.uploadToken(mac);
 
-        response.write(`
-        {
-            "uptoken": "${uploadToken}"
-        }
-        `)
+        response.write(`{"uptoken": "${uploadToken}"}`)
         response.end()
     }else{
         response.statusCode = 404
