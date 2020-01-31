@@ -8,6 +8,12 @@
     <title>Document</title>
 </head>
 <body>
+    <form method="post" enctype="multipart/form-data" id="form" action="upload">
+        <div id="box">
+            <button class="select-button">选择文件</button>
+            <input class="file-input" type="file" id="select" />
+        </div>
+    </form>
     <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
     <script>
         console.log(window.AV)
@@ -31,6 +37,24 @@
         // testObject.save().then(function (testObject) {
         //     console.log('保存成功。')
         // })
+        var file
+        var key
+        var token
+        var putExtra = {
+            fname: "",
+            params: {},
+            mimeType: null
+        };
+        var config = {
+            useCdnDomain: true,
+            region: null
+        };
+        var observable = qiniu.upload(file, key, token, putExtra, config)
+
+        var subscription = observable.subscribe(observer) // 上传开始
+
+        subscription.unsubscribe() // 上传取消
+
     </script>
     <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
     <script>
