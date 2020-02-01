@@ -5,10 +5,100 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="..">
-    <title>Document</title>
+    <link rel="stylesheet" href="./style/admin.css">
+    <script src="//at.alicdn.com/t/font_1624888_8cjwm9iv7hl.js"></script>
+    <title>SadMusic后台管理</title>
 </head>
 <body>
+    <main>
+        <section class="title">
+            <h1>SAD MUSIC &nbsp&nbsp</h1>
+        </section>
+        <section class="upload" onclick="document.querySelector('#selected').click()">
+            <div class="uploadInner" >
+                <h3>拖拽 或 浏览</h3>
+                <button class="uploader" id="h5">UPLOAD</button>
+                <input class="file-input" style="display: none" name="selected" type="file" id="selected" />
+            </div>
+        </section>
+        <section class="lists">
+            <h2 class="lists-name">
+                音乐库
+            </h2>
+            <ol class="lists-items">
+                <li class="item">
+                    <div class="item-name">Dear God Remix</div>
+                    <div class="item-singer">Buzzy</div>
+                    <div class="item-album">Dear God Remix</div>
+                    <div class="item-duration">03:10</div>
+                    <div class="item-action">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-bianji"></use>
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-shanchu"></use>
+                        </svg>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="item-name">完美生活</div>
+                    <div class="item-singer">许巍</div>
+                    <div class="item-album">时光·漫步</div>
+                    <div class="item-duration">04:56</div>
+                    <div class="item-action">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-bianji"></use>
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-shanchu"></use>
+                        </svg>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="item-name">我爱你，再见</div>
+                    <div class="item-singer">朴树</div>
+                    <div class="item-album">生如夏花</div>
+                    <div class="item-duration">03:57</div>
+                    <div class="item-action">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-bianji"></use>
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-shanchu"></use>
+                        </svg>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="item-name">生如夏花</div>
+                    <div class="item-singer">朴树</div>
+                    <div class="item-album">生如夏花</div>
+                    <div class="item-duration">03:57</div>
+                    <div class="item-action">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-bianji"></use>
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-shanchu"></use>
+                        </svg>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="item-name">她在睡梦中</div>
+                    <div class="item-singer">朴树</div>
+                    <div class="item-album">生如夏花</div>
+                    <div class="item-duration">03:57</div>
+                    <div class="item-action">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-bianji"></use>
+                        </svg>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-shanchu"></use>
+                        </svg>
+                    </div>
+                </li>
+            </ol>
+        </section>
+    </main>
 <!--    <form method="post" enctype="multipart/form-data" id="form" >
         <div id="box" >
             <input class="file-input" name="selected" type="file" id="selected" />
@@ -25,72 +115,71 @@
     </div>-->
 
 
-    <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script>
 
-        AV.init({
-            appId: "NfptNwamDHA9VDTGMiSaSAFy-gzGzoHsz",
-            appKey: "KA6pShPTmYEhxNWRulVHYcrF",
-            serverURLs: "https://nfptnwam.lc-cn-n1-shared.com"
-        });
-        // //create data base
-        // var TestObject = AV.Object.extend('Playlist');
-        // //create a test object
-        // var testObject = new TestObject();
-        // //insert a record
-        // testObject.set({
-        //     name: 'test',
-        //     cover: 'test',
-        //     creatorId: 'test',
-        //     description:'test',
-        //     songs:['1','2']
-        // });
-        // testObject.save().then(function (testObject) {
-        //     console.log('保存成功。')
-        // })
-        $.ajax({url: "http://192.168.0.108:9000/uptoken", success: function(res){
-                var token = JSON.parse(res).uptoken
-                var domain = 'q4nj29ews.bkt.clouddn.com'
-                var config = {
-                    useCdnDomain: true,
-                    disableStatisticsReport: false,
-                    retryCount: 6,
-                    region: null
-                };
-                var putExtra = {
-                    fname: "",
-                    params: {},
-                    mimeType: null
-                };
-                console.log(JSON.parse(res).uptoken)
-                var uploadWithSDK = function () {
-                    var subscription
-                    var observable
-                    var observer = {
-                        next(res){
-                            // ...
-                        },
-                        error(err){
-                            // ...
-                        },
-                        complete(res){
-                            // ...
-                        }
-                    }
-                    var file = document.querySelector('#selected').files[0]
-                    var key = file.name
-                    observable = qiniu.upload(file, key, token, putExtra, config)
-                    subscription = observable.subscribe(observer)
-                    console.log(111)
-                }
-                $('#h5').click(uploadWithSDK);
 
-            }})
-    </script>
-    <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
-    <script>
-
-    </script>
 </body>
+<script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
+<script>
+    AV.init({
+        appId: "NfptNwamDHA9VDTGMiSaSAFy-gzGzoHsz",
+        appKey: "KA6pShPTmYEhxNWRulVHYcrF",
+        serverURLs: "https://nfptnwam.lc-cn-n1-shared.com"
+    });
+    // //create data base
+    // var TestObject = AV.Object.extend('Playlist');
+    // //create a test object
+    // var testObject = new TestObject();
+    // //insert a record
+    // testObject.set({
+    //     name: 'test',
+    //     cover: 'test',
+    //     creatorId: 'test',
+    //     description:'test',
+    //     songs:['1','2']
+    // });
+    // testObject.save().then(function (testObject) {
+    //     console.log('保存成功。')
+    // })
+    $.ajax({url: "http://192.168.0.108:9000/uptoken", success: function(res){
+            var token = JSON.parse(res).uptoken
+            var domain = 'q4nj29ews.bkt.clouddn.com'
+            var config = {
+                useCdnDomain: true,
+                disableStatisticsReport: false,
+                retryCount: 6,
+                region: null
+            };
+            var putExtra = {
+                fname: "",
+                params: {},
+                mimeType: null
+            };
+            console.log(JSON.parse(res).uptoken)
+            var uploadWithSDK = function (e) {
+                e.stopPropagation()
+                var subscription
+                var observable
+                var observer = {
+                    next(res){
+                        // ...
+                    },
+                    error(err){
+                        // ...
+                    },
+                    complete(res){
+                        // ...
+                    }
+                }
+                var file = document.querySelector('#selected').files[0]
+                var key = file.name
+                observable = qiniu.upload(file, key, token, putExtra, config)
+                subscription = observable.subscribe(observer)
+                console.log(111)
+            }
+            $('#h5').click(uploadWithSDK);
+
+        }})
+</script>
 </html>
