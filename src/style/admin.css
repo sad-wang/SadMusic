@@ -85,7 +85,7 @@ body main .lists .lists-tab div{
     padding: 5px 25px;
     margin-right: 10px;
 }
-body main .lists .lists-tab .library:hover{
+body main .lists .lists-tab .active{
     color: black;
     background-color: #fff;
 }
@@ -101,7 +101,7 @@ body main .lists .lists-items .item{
     flex-direction: row;
     align-items: center;
     margin: 1px 10px;
-    padding: 10px 20px;
+    padding: 0 20px;
     background-color: #dddddd40;
     font-size: 13px;
     font-weight: lighter;
@@ -128,28 +128,40 @@ body main .lists .lists-items .item:hover{
 }
 body main .lists .lists-items .item-title:hover {
     background-color: #dddddd00;
-
 }
 body main .lists .lists-items .item .item-name{
-    font-weight: bolder;
+    font-weight: bold;
+    line-height: 33px;
     flex: 1;
 }
 body main .lists .lists-items .item .item-singer{
+    line-height: 33px;
     flex: 1;
-
 }
 body main .lists .lists-items .item .item-album{
+    line-height: 33px;
     flex: 1;
-
 }
-body main .lists .lists-items .item .item-duration{
-    flex: 1;
 
+body main .lists .lists-items .item .item-duration{
+    line-height: 33px;
+    flex: 1;
+}
+body main .lists .lists-items .item input{
+    font-size: 13px;
+    color: white;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    background-color: #ffffff00;
+    border: 0px;
+    line-height: 33px;
+    font-weight: lighter;
 }
 body main .lists .lists-items .item .item-action{
     display: flex;
     flex-direction: row;
-    flex: 0.4;
+
+    width: 77px;
 }
 body main .lists .lists-items .item .item-action .icon{
     width: 1.2em; height: 1.2em;
