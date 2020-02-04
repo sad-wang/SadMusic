@@ -42,7 +42,8 @@
                             complete(res){
                                 // ...
                                 url='http://'+domain+'/'+encodeURI(res.key)
-                                console.log(url)
+                                console.log('upload complete')
+                               window.eventHub.emit('upload',{url:url})
                             }
                         }
                         var file = document.querySelector('#selected').files[0]
