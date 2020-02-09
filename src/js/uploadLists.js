@@ -13,10 +13,10 @@
             </li>
         `,
         fileinputTemplate:` 
-            <input class="file-input" style="display: none" name="selected" type="file" id="selected"/>
+            <input class="file-input" style="display: none" name="selected" type="file" id="selected" data-index="__index__"/>
         `,
         itemTemplate:`            
-            <li class="item">
+            <li class="item" data-index="__index__">
                 <input class="item-file" value="__name__">
                 <input class="item-name" value="">
                 <input class="item-singer" value="">
@@ -30,7 +30,6 @@
                     </svg>
                 </div>
             </li> 
-           
         `,
         render(data){
             $(this.el).html(this.template)
@@ -44,17 +43,17 @@
                 this.createFileInput(view)
             });
         },
-        createFileInput(view) {
-            $(view.el).append(view.fileinputTemplate).children('.file-input:last-child').click().change(()=>{
-                this.createListsItem(view)
+        createFileInput(view) {//view.fileinputTemplate.replace(/[^0-9]/g,'')
+            let index =$('.file-input:last').attr('data-index')===undefined ? 0 : $('.file-input:last').attr('data-index')-0+1
+            $(view.el).append(view.fileinputTemplate.replace(`__index__`,index)).children('.file-input[data-index='+index+']').click().change(()=>{
+                this.createListsItem(view,index)
             })
         },
-        createListsItem(view){
-            $(view.el).append(view.itemTemplate.replace(`__name__`,$('.file-input:last')[0].files[0].name))
-            let index = $('.file-input').length-1
-            $('.upload-icon:last')[0].onclick=()=>{
+        createListsItem(view,index){
+            $(view.el).append(view.itemTemplate.replace(`__name__`,$('.file-input[data-index='+index+']')[0].files[0].name).replace(`__index__`,index))
+            $('.item[data-index='+index+']').children('.item-action').children('.upload-icon')[0].onclick=()=>{
                 // this.initQiniu($('.file-input')[index].files[0])
-                this.upload('9000','q4nj29ews.bkt.clouddn.com',$('.file-input')[index].files[0])
+                this.upload('9000','q4nj29ews.bkt.clouddn.com',$('.file-input[data-index='+index+']')[0].files[0])
             }
         },
         upload(port,domain,file){
@@ -95,7 +94,7 @@
             let token
             $.ajax({
                 async :false,
-                url: 'http://192.168.0.108:'+port+'/token',
+                url: 'http://127.0.0.1:'+port+'/token',
                 success: function(res){
                     token = JSON.parse(res).token
                 }
