@@ -19,7 +19,7 @@ var server = http.createServer(function(request, response){
     var method = request.method
     /******** 从这里开始看，上面不要看 ************/
     console.log('得到 HTTP 路径\n' + path)
-    if(path == "/uptoken"){
+    if(path == "/token"){
         response.setHeader('Content-Type','text/css; charset=utf-8')
         response.setHeader('Access-Control-Allow-Origin','*')
 
@@ -35,7 +35,7 @@ var server = http.createServer(function(request, response){
         var putPolicy = new qiniu.rs.PutPolicy(options);
         var uploadToken=putPolicy.uploadToken(mac);
 
-        response.write(`{"uptoken": "${uploadToken}"}`)
+        response.write(`{"token": "${uploadToken}"}`)
         response.end()
     }else{
         response.statusCode = 404

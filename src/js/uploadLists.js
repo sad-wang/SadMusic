@@ -53,52 +53,55 @@
             $(view.el).append(view.itemTemplate.replace(`__name__`,$('.file-input:last')[0].files[0].name))
             let index = $('.file-input').length-1
             $('.upload-icon:last')[0].onclick=()=>{
-                this.initQiniu($('.file-input')[index].files[0])
+                // this.initQiniu($('.file-input')[index].files[0])
+                this.upload('9000','q4nj29ews.bkt.clouddn.com',$('.file-input')[index].files[0])
             }
         },
-        initQiniu(file){
-            $.ajax({url: "http://192.168.0.108:9000/uptoken", success: function(res){
-                    let token = JSON.parse(res).uptoken
-                    let domain = 'q4nj29ews.bkt.clouddn.com'
-                    let url
-                    let config = {
-                        useCdnDomain: true,
-                        disableStatisticsReport: false,
-                        retryCount: 6,
-                        region: null
-                    };
-                    let putExtra = {
-                        fname: "",
-                        params: {},
-                        mimeType: null
-                    };
-                    // console.log(JSON.parse(res).uptoken)
-                    let uploadWithSDK = function () {
-
-                        let subscription
-                        let observable
-                        let observer = {
-                            next(res){
-                                // ...
-                                console.log('ing')
-                            },
-                            error(err){
-                                // ...
-                            },
-                            complete(res){
-                                // ...
-                                url='http://'+domain+'/'+encodeURI(res.key)
-                                console.log('upload complete')
-                            }
-                        }
-                        let key = file.name
-                        observable = qiniu.upload(file, key, token, putExtra, config)
-                        observable.subscribe(observer)
-                    }()
-                    // $('#upload').click(uploadWithSDK);
-                }})
+        upload(port,domain,file){
+            this.qiniuConfig(port,domain,file)
+            qiniu.upload(this.file, this.key, this.token, this.putExtra, this.config).subscribe(this.observer)
         },
-
+        qiniuConfig(port,domain,file){
+            this.token = this.getToken(port)
+            this.domain = domain
+            this.file = file
+            this.config = {
+                useCdnDomain: true,
+                disableStatisticsReport: false,
+                retryCount: 6,
+                region: null
+            }
+            this.putExtra = {
+                fname: "",
+                params: {},
+                mimeType: null
+            }
+            this.key = this.file.name
+            this.observer = {
+                next(res){
+                    console.log(this.key+'uploading~')
+                },
+                error(err){
+                    console.log(this.key+'upload failed!')
+                },
+                complete(res){
+                    let fileUrl = 'http://' + domain + '/' + encodeURI(res.key)
+                    console.log(fileUrl)
+                    console.log(this.key+'upload completed!')
+                }
+            }
+        },
+        getToken(port){
+            let token
+            $.ajax({
+                async :false,
+                url: 'http://192.168.0.108:'+port+'/token',
+                success: function(res){
+                    token = JSON.parse(res).token
+                }
+            })
+            return token
+        },
     }
     controller.init(view,model)
 }
