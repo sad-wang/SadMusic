@@ -41,14 +41,20 @@
         init(view,model){
             view.render(model.data);
             window.eventHub.on('fileUpdate',()=>{
-                $(view.el).append(view.fileinputTemplate).children('.file-input:last-child').click().change(()=>{
-                    $(view.el).append(view.itemTemplate.replace(`__name__`,$('.file-input:last')[0].files[0].name))
-                    let index = $('.file-input').length-1
-                    $('.upload-icon:last')[0].onclick=()=>{
-                        this.initQiniu($('.file-input')[index].files[0])
-                    }
-                })
+                this.createFileInput(view)
             });
+        },
+        createFileInput(view) {
+            $(view.el).append(view.fileinputTemplate).children('.file-input:last-child').click().change(()=>{
+                this.createListsItem(view)
+            })
+        },
+        createListsItem(view){
+            $(view.el).append(view.itemTemplate.replace(`__name__`,$('.file-input:last')[0].files[0].name))
+            let index = $('.file-input').length-1
+            $('.upload-icon:last')[0].onclick=()=>{
+                this.initQiniu($('.file-input')[index].files[0])
+            }
         },
         initQiniu(file){
             $.ajax({url: "http://192.168.0.108:9000/uptoken", success: function(res){
@@ -66,7 +72,7 @@
                         params: {},
                         mimeType: null
                     };
-                    console.log(JSON.parse(res).uptoken)
+                    // console.log(JSON.parse(res).uptoken)
                     let uploadWithSDK = function () {
 
                         let subscription
@@ -87,7 +93,7 @@
                         }
                         let key = file.name
                         observable = qiniu.upload(file, key, token, putExtra, config)
-                        subscription = observable.subscribe(observer)
+                        observable.subscribe(observer)
                     }()
                     // $('#upload').click(uploadWithSDK);
                 }})
