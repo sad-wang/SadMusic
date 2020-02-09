@@ -129,6 +129,10 @@ body main .lists .lists-items .item:hover{
 body main .lists .lists-items .item-title:hover {
     background-color: #dddddd00;
 }
+body main .lists .lists-items .item .item-file{
+    line-height: 33px;
+    flex: 1;
+}
 body main .lists .lists-items .item .item-name{
     line-height: 33px;
     flex: 1;
@@ -142,7 +146,7 @@ body main .lists .lists-items .item .item-album{
     flex: 1;
 }
 
-body main .lists .lists-items .item .item-duration{
+body main .lists .lists-items .item .item-url{
     line-height: 33px;
     flex: 1;
 }
@@ -159,7 +163,6 @@ body main .lists .lists-items .item input{
 body main .lists .lists-items .item .item-action{
     display: flex;
     flex-direction: row;
-
     width: 77px;
 }
 body main .lists .lists-items .item .item-action .icon{
