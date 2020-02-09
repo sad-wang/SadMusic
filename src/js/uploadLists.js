@@ -25,7 +25,7 @@
                     <svg class="icon upload-icon" aria-hidden="true" >
                         <use xlink:href="#icon-shangchuan"></use>
                     </svg>
-                    <svg class="icon" aria-hidden="true">
+                    <svg class="icon delete-icon" aria-hidden="true">
                         <use xlink:href="#icon-shanchu"></use>
                     </svg>
                 </div>
@@ -51,12 +51,24 @@
         },
         createListsItem(view,index){
             $(view.el).append(view.itemTemplate.replace(`__name__`,$('.file-input[data-index='+index+']')[0].files[0].name).replace(`__index__`,index))
+            this.uploadIcon(index)
+            this.deleteIcon(index)
+        },
+        uploadIcon(index){
             $('.item[data-index='+index+']').children('.item-action').children('.upload-icon')[0].onclick=()=>{
-                // this.initQiniu($('.file-input')[index].files[0])
-                this.upload('9000','q4nj29ews.bkt.clouddn.com',$('.file-input[data-index='+index+']')[0].files[0])
+                this.uploadSong('9000','q4nj29ews.bkt.clouddn.com',$('.file-input[data-index='+index+']')[0].files[0])
             }
         },
-        upload(port,domain,file){
+        deleteIcon(index){
+            $('.item[data-index='+index+']').children('.item-action').children('.delete-icon')[0].onclick=()=>{
+                this.deleteSong(index)
+            }
+        },
+        deleteSong(index){
+            $('.item[data-index='+index+']').remove()
+            $('.file-input[data-index='+index+']').remove()
+        },
+        uploadSong(port,domain,file){
             this.qiniuConfig(port,domain,file)
             qiniu.upload(this.file, this.key, this.token, this.putExtra, this.config).subscribe(this.observer)
         },
