@@ -13,13 +13,13 @@
         <main>
             <section class="top">
                 <h1>SAD MUSIC &nbsp&nbsp</h1>
-                <div class="upload" id="upload1" onclick="document.querySelector('#selected').click()">
+                <div class="upload" id="upload1" >
                     <svg class="icon" aria-hidden="true" style=" width: 1.2em; height: 1.2em; margin-right:10px">
                         <use xlink:href="#icon-shangchuan"></use>
                     </svg>
                     上传音乐
                 </div>
-                <input class="file-input" multiple style="display: none" name="selected" type="file" id="selected"/>
+                <div class="fileLists"></div>
                 <button class="uploader" id="upload">UPLOAD</button>
             </section>
             <section class="lists">
@@ -33,7 +33,6 @@
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
     <script src="./js/eventhub.js"></script>
-
     <script src="./js/songLists.js"></script>
     <script src="./js/uploadLists.js"></script>
     <script src="./js/listsTab.js"></script>

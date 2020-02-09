@@ -60,6 +60,9 @@
             window.eventHub.on('upload',(data)=>{
                 console.log(data)
             })
+            window.eventHub.on('fileUpdate',(data)=>{
+                console.log(data.files[0].files[0])
+            })
         }
     }
     controller.init(view,model)

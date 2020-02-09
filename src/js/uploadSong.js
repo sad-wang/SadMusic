@@ -1,6 +1,7 @@
 {
     let view = {
-        el:'.upload',
+        el:'.fileLists',
+        template:`<input class="file-input" style="display: none" name="selected" type="file" id="selected"/>`,
     }
     let model = {};
     let controller = {
@@ -8,30 +9,37 @@
             this.view = view;
             this.model = model;
             this.initQiniu()
+            this.createFileInput(view)
+        },
+        createFileInput(view){
+            document.querySelector('.upload').onclick=()=>{
+                $(view.el).append(view.template).children('.file-input:last-child').click().change(()=>{
+                    window.eventHub.emit('fileUpdate', {files:$(view.el).children('.file-input')})
+                })
+            }
         },
         initQiniu(){
             $.ajax({url: "http://192.168.0.108:9000/uptoken", success: function(res){
-                    var token = JSON.parse(res).uptoken
-                    var domain = 'q4nj29ews.bkt.clouddn.com'
-                    var url
-                    var config = {
+                    let token = JSON.parse(res).uptoken
+                    let domain = 'q4nj29ews.bkt.clouddn.com'
+                    let url
+                    let config = {
                         useCdnDomain: true,
                         disableStatisticsReport: false,
                         retryCount: 6,
                         region: null
                     };
-                    var putExtra = {
+                    let putExtra = {
                         fname: "",
                         params: {},
                         mimeType: null
                     };
                     console.log(JSON.parse(res).uptoken)
-                    var uploadWithSDK = function (e) {
-
+                    let uploadWithSDK = function (e) {
                         e.stopPropagation()
-                        var subscription
-                        var observable
-                        var observer = {
+                        let subscription
+                        let observable
+                        let observer = {
                             next(res){
                                 // ...
                                 console.log('ing')
@@ -46,8 +54,8 @@
                                window.eventHub.emit('upload',{url:url})
                             }
                         }
-                        var file = document.querySelector('#selected').files[0]
-                        var key = file.name
+                        let file = document.querySelector('#selected').files[0]
+                        let key = file.name
                         observable = qiniu.upload(file, key, token, putExtra, config)
                         subscription = observable.subscribe(observer)
                     }

@@ -1,6 +1,5 @@
 window.eventHub = {
     events:{
-
     },
     emit(eventName,data){
         for (let key in this.events){
