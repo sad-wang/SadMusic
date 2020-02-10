@@ -51,15 +51,23 @@
         },
         createListsItem(view,index){
             $(view.el).append(view.itemTemplate.replace(`__name__`,$('.file-input[data-index='+index+']')[0].files[0].name).replace(`__index__`,index))
-            this.uploadIcon(index)
-            this.deleteIcon(index)
+            this.bindUploadIcon(index)
+            this.bindDeleteIcon(index)
         },
-        uploadIcon(index){
+        bindUploadIcon(index){
             $('.item[data-index='+index+']').children('.item-action').children('.upload-icon')[0].onclick=()=>{
-                this.uploadSong('9000','q4nj29ews.bkt.clouddn.com',$('.file-input[data-index='+index+']')[0].files[0])
+                let file = $('.file-input[data-index='+index+']')[0].files[0]
+                let song = $('.item[data-index='+index+']')
+                this.uploadSong('9000','q4nj29ews.bkt.clouddn.com',file,
+                    'song_list',{
+                        song_name: song.children('.item-name')[0].value,
+                        song_singer:song.children('.item-singer')[0].value,
+                        song_album:song.children('.item-album')[0].value,
+                        song_url:'http://q4nj29ews.bkt.clouddn.com/' + encodeURI(file.name),
+                    })
             }
         },
-        deleteIcon(index){
+        bindDeleteIcon(index){
             $('.item[data-index='+index+']').children('.item-action').children('.delete-icon')[0].onclick=()=>{
                 this.deleteSong(index)
             }
@@ -68,14 +76,36 @@
             $('.item[data-index='+index+']').remove()
             $('.file-input[data-index='+index+']').remove()
         },
-        uploadSong(port,domain,file){
-            this.qiniuConfig(port,domain,file)
+        uploadSong(port,domain,file,table,data){
+            this.qiniuUpload(port,domain,file)
+            this.leancloudUpload(table,data)
+        },
+        qiniuUpload(port,domain,file){
+            this.qiniuInit(port,domain,file)
             qiniu.upload(this.file, this.key, this.token, this.putExtra, this.config).subscribe(this.observer)
         },
-        qiniuConfig(port,domain,file){
+        leancloudUpload(table,data){
+            this.leancloudInit()
+            this.leancloudInsert(table,data)
+        },
+        leancloudInsert(table,data){
+            let tableClass = AV.Object.extend(table)
+            let tableObject = new tableClass()
+            tableObject.set(data)
+            tableObject.save()
+        },
+        leancloudInit(){
+            AV.init({
+                appId: "NfptNwamDHA9VDTGMiSaSAFy-gzGzoHsz",
+                appKey: "KA6pShPTmYEhxNWRulVHYcrF",
+                serverURLs: "https://nfptnwam.lc-cn-n1-shared.com"
+            });
+        },
+        qiniuInit(port,domain,file){
             this.token = this.getToken(port)
             this.domain = domain
             this.file = file
+            this.key = file.name
             this.config = {
                 useCdnDomain: true,
                 disableStatisticsReport: false,
@@ -87,18 +117,18 @@
                 params: {},
                 mimeType: null
             }
-            this.key = this.file.name
             this.observer = {
                 next(res){
-                    console.log(this.key+'uploading~')
+                    console.log(file.name +' is uploading~')
                 },
                 error(err){
-                    console.log(this.key+'upload failed!')
+                    console.log(file.name + ' upload failed!')
+                    console.log(err.message)
                 },
                 complete(res){
                     let fileUrl = 'http://' + domain + '/' + encodeURI(res.key)
-                    console.log(fileUrl)
-                    console.log(this.key+'upload completed!')
+                    console.log(file.name + 'was upload completed!')
+                    console.log(file.name + ' url: '+  fileUrl)
                 }
             }
         },

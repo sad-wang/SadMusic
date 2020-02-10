@@ -1,8 +1,4 @@
-AV.init({
-    appId: "NfptNwamDHA9VDTGMiSaSAFy-gzGzoHsz",
-    appKey: "KA6pShPTmYEhxNWRulVHYcrF",
-    serverURLs: "https://nfptnwam.lc-cn-n1-shared.com"
-});
+
 // //create data base
 // var TestObject = AV.Object.extend('Playlist');
 // //create a test object
