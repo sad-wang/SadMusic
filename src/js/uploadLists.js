@@ -1,6 +1,6 @@
 {
     let view = {
-            el:'#uploadLists',
+        el:'#uploadLists',
         template:`
             <li class="item item-title">
                 <div class="item-file">文件</div>
@@ -39,7 +39,7 @@
     let controller = {
         init(view,model){
             view.render(model.data);
-            window.eventHub.on('fileUpdate',()=>{
+            window.eventHub.on('uploadSong',()=>{
                 this.createFileInput(view)
             });
         },

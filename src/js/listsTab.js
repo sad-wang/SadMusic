@@ -13,9 +13,8 @@
     let model = {}
     let controller = {
         init(view,model){
-            this.view = view
-            this.model = model
-            this.view.render(this.model.data)
+            view.render(model.data)
+            window.eventHub.on('')
         }
     }
     controller.init(view,model)
