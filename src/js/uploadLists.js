@@ -42,8 +42,8 @@
         }
     }
     let model = {
-        data:{
-            songLists:[]
+        data: {
+            songLists: []
         },
         createSong(file){
             this.data.songLists.push({
@@ -88,11 +88,12 @@
         bindUpload(index){
             $('.upload-icon')[index].onclick=()=>{
                 let song = this.model.data.songLists[index]
-                let songWithoutFile = JSON.parse(JSON.stringify(song));
-                delete songWithoutFile.file
+                let songWithoutFileAndFile_name = JSON.parse(JSON.stringify(song));
+                delete songWithoutFileAndFile_name.file
+                delete songWithoutFileAndFile_name.file_name
                 this.uploadSong(
                     '9000','q4nj29ews.bkt.clouddn.com',song.file,
-                    'song_list',Object.assign({},songWithoutFile)
+                    'song_list',Object.assign({},songWithoutFileAndFile_name)
                 )
             }
         },
@@ -174,7 +175,7 @@
         getToken(port){
             let token
             $.ajax({
-                async :false,
+                async: false,
                 url: 'http://127.0.0.1:'+port+'/token',
                 success: function(res){
                     token = JSON.parse(res).token

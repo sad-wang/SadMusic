@@ -34,19 +34,58 @@
             for(let index in data.libraryLists){
                 html += this.songTemplate
                 placeholders.map((string)=>{
-                    html = html.replace(`__${string}`,data.libraryList[index][string])
+                    html = html.replace(`__${string}__`,data.libraryLists[index][string])
                 })
             }
             $(this.el).html(html)
         }
     }
-    let model = {}
+    let model = {
+        data: {
+            libraryLists: [
+                // {
+                //     song_name: 1,
+                //     singer: 2,
+                //     album: 3,
+                //     url: 4,
+                // },
+            ]
+        },
+    }
     let controller = {
         init(view,model){
             this.view = view
             this.model = model
             this.view.render(this.model.data)
-        }
+            this.getLibraryLists()
+        },
+        getLibraryLists(){
+            this.leancloudInit()
+            let query = new AV.Query('song_list')
+            let querySelect = ['song_name', 'singer','album','url',]
+            query.select(querySelect)
+            query.find().then(function(results) {
+
+                let queryResult = results.map((obj) => {
+                    return obj.attributes
+                })
+                console.log(this.model.data.libraryLists)
+                this.model.data.libraryLists = queryResult
+                this.view.render(this.model.data)
+            }.bind(this), function(error) {
+                console.log('error: '+error)
+            });
+
+        },
+        leancloudInit(){
+            if(!AV.applicationId){
+                AV.init({
+                    appId: "NfptNwamDHA9VDTGMiSaSAFy-gzGzoHsz",
+                    appKey: "KA6pShPTmYEhxNWRulVHYcrF",
+                    serverURLs: "https://nfptnwam.lc-cn-n1-shared.com"
+                })
+            }
+        },
     }
     controller.init(view,model)
 }
