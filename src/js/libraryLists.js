@@ -3,7 +3,7 @@
         el:'#libraryLists',
         template:`
             <li class="item item-title">
-                <div class="item-name">歌名</div>
+                <div class="item-song_name">歌名</div>
                 <div class="item-singer">歌手</div>
                 <div class="item-album">专辑</div>
                 <div class="item-url">链接</div>
@@ -14,7 +14,7 @@
         `,
         itemTemplate: `
             <li class="item">
-                <div class="item-name">Dear God Remix</div>
+                <div class="item-song_name">Dear God Remix</div>
                 <div class="item-singer">Buzzy</div>
                 <div class="item-album">Dear God Remix</div>
                 <div class="item-url">03:10</div>

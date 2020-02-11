@@ -4,23 +4,21 @@
         template:`
             <li class="item item-title">
                 <div class="item-file">文件</div>
-                <div class="item-name">歌名</div>
+                <div class="item-song_name">歌名</div>
                 <div class="item-singer">歌手</div>
                 <div class="item-album">专辑</div>
                 <div class="item-action">
                    操作
                 </div>
             </li>
+             <input style="display: none"  type="file"/>
         `,
-        fileinputTemplate:` 
-            <input class="file-input" style="display: none" name="selected" type="file" id="selected" data-index="__index__"/>
-        `,
-        itemTemplate:`            
-            <li class="item" data-index="__index__">
-                <input class="item-file" value="__name__">
-                <input class="item-name" value="">
-                <input class="item-singer" value="">
-                <input class="item-album" value="">
+        songTemplate:`            
+            <li class="item">
+                <input class="item-file" value="__file_name__">
+                <input class="item-song_name" value="__song_name__">
+                <input class="item-singer" value="__singer__">
+                <input class="item-album" value="__album__">
                 <div class="item-action">
                     <svg class="icon upload-icon" aria-hidden="true" >
                         <use xlink:href="#icon-shangchuan"></use>
@@ -32,74 +30,105 @@
             </li> 
         `,
         render(data){
-            $(this.el).html(this.template)
+            let html = this.template
+            let placeholders = ['file_name', 'song_name', 'singer', 'album']
+            console.log()
+            for(let index in data.songLists){
+                html += this.songTemplate
+                placeholders.map((string)=>{
+                    html = html.replace(`__${string}__`,data.songLists[index][string])
+                })
+            }
+            $(this.el).html(html)
         }
     }
-    let model = {}
-    let controller = {
-        init(view,model){
-            view.render(model.data);
-            window.eventHub.on('uploadSong',()=>{
-                this.createFileInput(view)
-            });
+    let model = {
+        data:{
+            songLists:[]
         },
-        createFileInput(view) {//view.fileinputTemplate.replace(/[^0-9]/g,'')
-            let index =$('.file-input:last').attr('data-index')===undefined ? 0 : $('.file-input:last').attr('data-index')-0+1
-            $(view.el).append(view.fileinputTemplate.replace(`__index__`,index)).children('.file-input[data-index='+index+']').click().change(()=>{
-                this.createListsItem(view,index)
+        createSong(file){
+            this.data.songLists.push({
+                    file: file,
+                    file_name: file.name,
+                    song_name: '',
+                    singer: '',
+                    album: '',
+                    url: 'http://q4nj29ews.bkt.clouddn.com/' + encodeURI(file.name)
             })
         },
-        createListsItem(view,index){
-            $(view.el).append(view.itemTemplate.replace(`__name__`,$('.file-input[data-index='+index+']')[0].files[0].name).replace(`__index__`,index))
-            this.bindUploadIcon(index)
-            this.bindDeleteIcon(index)
+        setSong(index,attr,value){
+            this.data.songLists[index][attr] = value
+        }
+    }
+    let controller = {
+        init(view,model){
+            this.view = view
+            this.model = model
+            this.view.render(this.model.data);
+            window.eventHub.on('uploadSong',()=>{
+                this.createSong()
+            });
         },
-        bindUploadIcon(index){
-            $('.item[data-index='+index+']').children('.item-action').children('.upload-icon')[0].onclick=()=>{
-                let file = $('.file-input[data-index='+index+']')[0].files[0]
-                let song = $('.item[data-index='+index+']')
-                this.uploadSong('9000','q4nj29ews.bkt.clouddn.com',file,
-                    'song_list',{
-                        song_name: song.children('.item-name')[0].value,
-                        song_singer:song.children('.item-singer')[0].value,
-                        song_album:song.children('.item-album')[0].value,
-                        song_url:'http://q4nj29ews.bkt.clouddn.com/' + encodeURI(file.name),
-                    })
+        createSong(){
+            $('input[type="file"]').click().change((e)=>{
+                let file = e.target.files[0]
+                if (file.name){
+                    this.model.createSong(file)
+                }
+                this.view.render(this.model.data)
+                this.bindEvent()
+            })
+        },
+        bindEvent(){
+            for (let index in this.model.data.songLists){
+                this.bindUpload(index)
+                this.bindInputEvent(['song_name','singer','album'],index)
+           }
+        },
+        bindUpload(index){
+            $('.upload-icon')[index].onclick=()=>{
+                let song = this.model.data.songLists[index]
+                let songWithoutFile = JSON.parse(JSON.stringify(song));
+                delete songWithoutFile.file
+                this.uploadSong(
+                    '9000','q4nj29ews.bkt.clouddn.com',song.file,
+                    'song_list',Object.assign({},songWithoutFile)
+                )
             }
         },
-        bindDeleteIcon(index){
-            $('.item[data-index='+index+']').children('.item-action').children('.delete-icon')[0].onclick=()=>{
-                this.deleteSong(index)
-            }
+        bindInputEvent(data,index){
+            data.map((string)=>{
+                $('input.item-'+string)[index].onchange=(e)=>{
+                    this.model.setSong(index,string,e.target.value)
+                }
+            })
         },
-        deleteSong(index){
-            $('.item[data-index='+index+']').remove()
-            $('.file-input[data-index='+index+']').remove()
-        },
-        uploadSong(port,domain,file,table,data){
+        uploadSong(port,domain,file,table_name,data){
             this.qiniuUpload(port,domain,file)
-            this.leancloudUpload(table,data)
+            this.leancloudUpload(table_name,data)
         },
         qiniuUpload(port,domain,file){
             this.qiniuInit(port,domain,file)
             qiniu.upload(this.file, this.key, this.token, this.putExtra, this.config).subscribe(this.observer)
         },
-        leancloudUpload(table,data){
+        leancloudUpload(table_name,data){
             this.leancloudInit()
-            this.leancloudInsert(table,data)
+            this.leancloudInsert(table_name,data)
         },
-        leancloudInsert(table,data){
-            let tableClass = AV.Object.extend(table)
+        leancloudInsert(table_name,data){
+            let tableClass = AV.Object.extend(table_name)
             let tableObject = new tableClass()
             tableObject.set(data)
             tableObject.save()
         },
         leancloudInit(){
-            AV.init({
-                appId: "NfptNwamDHA9VDTGMiSaSAFy-gzGzoHsz",
-                appKey: "KA6pShPTmYEhxNWRulVHYcrF",
-                serverURLs: "https://nfptnwam.lc-cn-n1-shared.com"
-            });
+            if(!AV.applicationId){
+                AV.init({
+                    appId: "NfptNwamDHA9VDTGMiSaSAFy-gzGzoHsz",
+                    appKey: "KA6pShPTmYEhxNWRulVHYcrF",
+                    serverURLs: "https://nfptnwam.lc-cn-n1-shared.com"
+                })
+            }
         },
         qiniuInit(port,domain,file){
             this.token = this.getToken(port)

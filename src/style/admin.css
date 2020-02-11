@@ -133,7 +133,7 @@ body main .lists .lists-items .item .item-file{
     line-height: 33px;
     flex: 1;
 }
-body main .lists .lists-items .item .item-name{
+body main .lists .lists-items .item .item-song_name{
     line-height: 33px;
     flex: 1;
 }
