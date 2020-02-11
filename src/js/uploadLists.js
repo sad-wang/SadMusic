@@ -81,8 +81,9 @@
         },
         bindEvent(){
             for (let index in this.model.data.songLists){
-                this.bindUpload(index)
                 this.bindInputEvent(['song_name','singer','album'],index)
+                this.bindUpload(index)
+                this.bindDelete(index)
            }
         },
         bindUpload(index){
@@ -94,6 +95,16 @@
                     '9000','q4nj29ews.bkt.clouddn.com',song.file,
                     'song_list',Object.assign({},songWithoutFile)
                 )
+            }
+        },
+        bindDelete(index){
+            $('.delete-icon')[index].onclick=()=>{
+                this.model.data.songLists = this.model.data.songLists.filter(function(){
+                    let i = arguments[1]
+                    return i != index ;
+                });
+                this.view.render(this.model.data)
+                this.bindEvent()
             }
         },
         bindInputEvent(data,index){
