@@ -12,12 +12,12 @@
                 </div>
             </li>
         `,
-        itemTemplate: `
+        songTemplate: `
             <li class="item">
-                <div class="item-song_name">Dear God Remix</div>
-                <div class="item-singer">Buzzy</div>
-                <div class="item-album">Dear God Remix</div>
-                <div class="item-url">03:10</div>
+                <div class="item-song_name">__song_name__</div>
+                <div class="item-singer">__singer__</div>
+                <div class="item-album">__album__</div>
+                <div class="item-url">__url__</div>
                 <div class="item-action">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-bianji"></use>
@@ -29,7 +29,15 @@
             </li>
         `,
         render(data){
-            $(this.el).html(this.template)
+            let html = this.template
+            let placeholders = ['song_name','singer','album','url']
+            for(let index in data.libraryLists){
+                html += this.songTemplate
+                placeholders.map((string)=>{
+                    html = html.replace(`__${string}`,data.libraryList[index][string])
+                })
+            }
+            $(this.el).html(html)
         }
     }
     let model = {}

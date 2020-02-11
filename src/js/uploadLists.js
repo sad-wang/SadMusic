@@ -32,7 +32,6 @@
         render(data){
             let html = this.template
             let placeholders = ['file_name', 'song_name', 'singer', 'album']
-            console.log()
             for(let index in data.songLists){
                 html += this.songTemplate
                 placeholders.map((string)=>{
