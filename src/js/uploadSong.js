@@ -17,15 +17,16 @@
     let model = {};
     let controller = {
         init(view,model){
-            view.render(model.data)
+            this.view = view
+            this.model = model
+            this.view.render(this.model.data)
             this.uploadSong()
         },
         uploadSong(){
             document.querySelector('.upload').onclick=()=>{
-                    window.eventHub.emit('uploadSong', {})
+                window.eventHub.emit('uploadSong', {})
             }
         },
-
     };
     controller.init(view,model)
 }
