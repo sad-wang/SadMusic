@@ -95,6 +95,9 @@ body main .lists .lists-items {
     justify-content: center;
     align-items: center;
 }
+body main .lists .lists-items.none {
+    display: none;
+}
 body main .lists .lists-items .item{
     width: 100%;
     display: flex;
