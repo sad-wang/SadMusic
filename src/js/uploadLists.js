@@ -3,10 +3,10 @@
         el:'#uploadLists',
         template:`
             <li class="item item-title">
-                <div class="item-file">文件</div>
-                <div class="item-song_name">歌名</div>
-                <div class="item-singer">歌手</div>
-                <div class="item-album">专辑</div>
+                <input class="item-file" value="文件" disabled >
+                <input class="item-song_name" value="歌名" disabled >
+                <input class="item-singer" value="歌手" disabled >
+                <input class="item-album" value="专辑" disabled >
                 <div class="item-action">
                    操作
                 </div>
@@ -15,7 +15,7 @@
         `,
         songTemplate:`            
             <li class="item">
-                <input class="item-file" value="__file_name__">
+                <input class="item-file" value="__file_name__" disabled>
                 <input class="item-song_name" value="__song_name__">
                 <input class="item-singer" value="__singer__">
                 <input class="item-album" value="__album__">

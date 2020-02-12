@@ -1,177 +1,28 @@
 /*init css*/
-* {padding: 0; margin: 0;box-sizing: border-box;font-family: "Microsoft YaHei UI";}
-a{color:#2d374b;text-decoration:none}
-a:hover{color:#cd0200;text-decoration:underline}
-li{list-style:none}
-
+* {padding: 0; margin: 0;box-sizing: border-box;cursor: default;user-select: none;}
+/*init icon*/
+.icon {width: 1.2em; height: 1.2em;fill: currentColor; overflow: hidden;}
 /*admin style*/
-body {
-    background-image: url(../images/back.jpg);
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-body main {
-    height: 100vh;
-    width: 87vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-body main .top {
-    height: 13vh;
-    width: 100%;
-    font-weight: bold;
-    padding-top: calc(13vh - 51px);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-body main .top h1{
-    display: inline-block;
-    font-size: 25px;
-    padding-bottom: 4px;
-}
-body main .top h1:after{
-    content: '';
-    display: block;
-    width: 45%;
-    height: 5px;
-    background-color: #fc166f;
-    margin-top: 13px;
-    border-radius: 3px;
-}
-body main .top .upload {
-    width: 205px;
-    height: 43px;
-    background-color: #fc166f;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    border-radius: 4px;
-    transform : scale(0.73,0.73);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-body main .lists{
-    margin-top: 27px;
-    flex: 1;
-    width: 100%;
-}
-body main .lists .lists-tab{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-}
-body main .lists .lists-tab div{
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border: solid 1px #fff;
-    padding: 5px 25px;
-    margin-right: 10px;
-}
-body main .lists .lists-tab .active{
-    color: black;
-    background-color: #fff;
-}
-body main .lists .lists-items {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-body main .lists .lists-items.none {
-    display: none;
-}
-body main .lists .lists-items .item{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 2px 10px;
-    padding: 5px 20px;
-    background-color: #dddddd27;
-    font-size: 13px;
-    font-weight: lighter;
-    letter-spacing: 0.07em;
-    border-radius: 2px;
-}
-body main .lists .lists-items .item-title{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px 20px;
-    font-size: 13px;
-    font-weight: lighter;
-    letter-spacing: 1em;
-    border-radius: 2px;
-    margin-top: 20px;
-    background-color: #dddddd00;
-    border-bottom: 1px solid #ffffff40;
-    margin-bottom: 10px;
-}
-body main .lists .lists-items .item:hover{
-    background-color: #dddddd40;
-}
-body main .lists .lists-items .item-title:hover {
-    background-color: #dddddd00;
-}
-body main .lists .lists-items .item .item-file{
-    line-height: 33px;
-    flex: 1;
-}
-body main .lists .lists-items .item .item-song_name{
-    line-height: 33px;
-    flex: 1;
-}
-body main .lists .lists-items .item .item-singer{
-    line-height: 33px;
-    flex: 1;
-}
-body main .lists .lists-items .item .item-album{
-    line-height: 33px;
-    flex: 1;
-}
-
-body main .lists .lists-items .item .item-url{
-    line-height: 33px;
-    flex: 1;
-}
-body main .lists .lists-items .item input{
-    font-size: 13px;
-    color: white;
-    letter-spacing: 0.07em;
-    border-radius: 2px;
-    background-color: #ffffff00;
-    border: 0px;
-    line-height: 33px;
-    font-weight: lighter;
-}
-body main .lists .lists-items .item .item-action{
-    display: flex;
-    flex-direction: row;
-    width: 77px;
-}
-body main .lists .lists-items .item .item-action .icon{
-    width: 1.2em; height: 1.2em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
-    margin-right:10px;
-}
+body {background-image: url(../images/back.jpg);background-attachment: fixed;background-size: cover;background-position: center;color: #fff;display: flex;flex-direction: column;justify-content: center;align-items: center;}
+body main {width: 87vw;display: flex;flex-direction: column;justify-content: center;align-items: center;padding-bottom: 15vh;}
+body main .top {height: 13vh;width: 100%;font-weight: bold;display: flex;flex-direction: row;justify-content: space-between;align-items: flex-end;margin-bottom: 5vh;}
+body main .top h1{display: inline-block;font-size: 25px;}
+body main .top h1:after{content: '';display: block;width: 45%;height: 5px;background-color: #fc166f;margin-top: 13px;border-radius: 3px;}
+body main .top .upload {width: 205px;height: 43px;background-color: #fc166f;font-size: 15px;font-weight: bold;letter-spacing: 2px;border-radius: 4px;transform : scale(0.73,0.73);display: flex;flex-direction: row;align-items: center;justify-content: center;cursor: pointer;}
+body main .top .upload .icon{margin-right: 10px}
+body main .lists {width: 100%;}
+body main .lists .lists-tab {width: 100%;display: flex;flex-direction: row;}
+body main .lists .lists-tab .tab {font-size: 13px;font-weight: bold;letter-spacing: 2px;border-radius: 4px;display: flex;flex-direction: row;align-items: center;justify-content: center;border: solid 1px #fff;padding: 5px 25px;margin-right: 10px;cursor: pointer;}
+body main .lists .lists-tab .active {color: black;background-color: #fff;}
+body main .lists .lists-items {display: flex;flex-direction: column;justify-content: center;align-items: center;}
+body main .lists .lists-items.none {display: none;}
+body main .lists .lists-items .item {width: 100%;display: flex;flex-direction: row;align-items: center;margin: 2px 10px;padding: 5px 20px;background-color: #dddddd27;border-radius: 2px;letter-spacing: 0.07em;}
+body main .lists .lists-items .item-title {padding: 10px 20px;font-size: 13px;letter-spacing: 1em;margin-top: 20px;background-color: #dddddd00;border-bottom: 1px solid #ffffff40;margin-bottom: 10px;}
+body main .lists .lists-items .item:hover {background-color: #dddddd40;}
+body main .lists .lists-items .item-title:hover {background-color: #dddddd00;}
+body main .lists .lists-items .item .item-file,.item-song_name,.item-singer,.item-album,.item-url {white-space: nowrap;text-overflow: ellipsis;overflow: hidden;line-height: 33px;flex: 1;font-size: 13px;font-weight: lighter;color: white;}
+body main .lists .lists-items .item .item-url {flex: 3;padding-right: 30px;}
+body main .lists .lists-items .item input {background-color: #ffffff00;border: none;letter-spacing: 0.07em;display: inline;margin-right: 50px;}
+body main .lists .lists-items .item-title input {letter-spacing: 1em;}
+body main .lists .lists-items .item .item-action {display: flex;flex-direction: row;flex: 0.4;}
+body main .lists .lists-items .item .item-action .icon {vertical-align: -0.15em;margin-right: 10px;}

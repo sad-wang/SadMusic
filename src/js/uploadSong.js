@@ -4,7 +4,7 @@
         template:`
             <h1>SAD MUSIC &nbsp&nbsp</h1>
             <div class="upload" id="upload1" >
-                <svg class="icon" aria-hidden="true" style=" width: 1.2em; height: 1.2em; margin-right:10px">
+                <svg class="icon" aria-hidden="true" >
                     <use xlink:href="#icon-shangchuan"></use>
                 </svg>
                 上传音乐
