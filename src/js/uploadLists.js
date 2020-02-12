@@ -98,7 +98,7 @@
             }
         },
         bindDelete(index){
-            $('.delete-icon')[index].onclick=()=>{
+            $(this.view.el + ' .delete-icon')[index].onclick=()=>{
                 this.model.data.songLists = this.model.data.songLists.filter(function(){
                     let i = arguments[1]
                     return i != index ;
