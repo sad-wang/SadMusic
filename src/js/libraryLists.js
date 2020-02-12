@@ -51,31 +51,31 @@
                 // },
             ]
         },
+        getLibraryLists(){
+            let query = new AV.Query('song_list')
+            let querySelect = ['song_name', 'singer','album','url',]
+            query.select(querySelect)
+            return query.find().then(function(results) {
+                this.data.libraryLists = results.map((obj) => {
+                    return obj.attributes
+                })
+            }.bind(this), function(error) {
+                console.log('查询 libraryLists 失败: ' + error)
+            });
+        }
     }
     let controller = {
         init(view,model){
             this.view = view
             this.model = model
             this.view.render(this.model.data)
+            this.leancloudInit()
             this.getLibraryLists()
         },
-        getLibraryLists(){
-            this.leancloudInit()
-            let query = new AV.Query('song_list')
-            let querySelect = ['song_name', 'singer','album','url',]
-            query.select(querySelect)
-            query.find().then(function(results) {
-
-                let queryResult = results.map((obj) => {
-                    return obj.attributes
-                })
-                console.log(this.model.data.libraryLists)
-                this.model.data.libraryLists = queryResult
+        getLibraryLists() {
+            this.model.getLibraryLists().then(()=>{
                 this.view.render(this.model.data)
-            }.bind(this), function(error) {
-                console.log('error: '+error)
-            });
-
+            })
         },
         leancloudInit(){
             if(!AV.applicationId){
