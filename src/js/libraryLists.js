@@ -19,7 +19,8 @@
                 <div class="item-album">__album__</div>
                 <div class="item-url">__url__</div>
                 <div class="item-action">
-                    <svg class="icon edit-icon" aria-hidden="true">
+                <!--编辑功能来日方长-->
+                    <svg class="icon edit-icon" aria-hidden="true" display="none">
                         <use xlink:href="#icon-bianji"></use>
                     </svg>
                     <svg class="icon delete-icon" aria-hidden="true">
@@ -42,14 +43,7 @@
     }
     let model = {
         data: {
-            songLists: [
-                // {
-                //     song_name: 1,
-                //     singer: 2,
-                //     album: 3,
-                //     url: 4,
-                // },
-            ]
+            songLists: []
         },
         init(){
             let query = new AV.Query('song_list')
@@ -86,8 +80,6 @@
         },
         bindDelete(index) {
             $(this.view.el + ' .delete-icon')[index].onclick=()=>{
-                // console.log(this.model.data.songLists[index])
-                // console.log(index)
                 this.leancloudDelete('song_list',this.model.data.songLists[index].objectId)
                 this.model.data.songLists = this.model.data.songLists.filter(function(){
                     let i = arguments[1]
