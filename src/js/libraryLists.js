@@ -51,13 +51,13 @@
                 // },
             ]
         },
-        getSongLists(){
+        init(){
             let query = new AV.Query('song_list')
-            let querySelect = ['song_name', 'singer','album','url',]
+            let querySelect = ['objectId','song_name', 'singer','album','url',]
             query.select(querySelect)
             return query.find().then(function(results) {
                 this.data.songLists = results.map((obj) => {
-                    return obj.attributes
+                    return Object.assign(obj.attributes,{objectId:obj.id})
                 })
             }.bind(this), function(error) {
                 console.log('查询 songLists 失败: ' + error)
@@ -70,10 +70,7 @@
             this.model = model
             this.view.render(this.model.data)
             this.leancloudInit()
-            this.getSongLists()
-        },
-        getSongLists() {
-            this.model.getSongLists().then(()=>{
+            this.model.init().then(()=>{
                 this.view.render(this.model.data)
                 this.bindEvent()
             })
@@ -81,7 +78,6 @@
         bindEvent() {
             for (let index in this.model.data.songLists){
                 this.bindEdit(index)
-                console.log('for')
                 this.bindDelete(index)
             }
         },
@@ -89,16 +85,22 @@
 
         },
         bindDelete(index) {
-            console.log(this.view.el + ' > .delete-icon')
             $(this.view.el + ' .delete-icon')[index].onclick=()=>{
-                console.log(index)
+                // console.log(this.model.data.songLists[index])
+                // console.log(index)
+                this.leancloudDelete('song_list',this.model.data.songLists[index].objectId)
                 this.model.data.songLists = this.model.data.songLists.filter(function(){
                     let i = arguments[1]
-                    return i != index ;
-                });
+                    return i != index
+                })
                 this.view.render(this.model.data)
                 this.bindEvent()
             }
+        },
+        leancloudDelete(table_name,objectId){
+            let tableObject = AV.Object.createWithoutData(table_name, objectId);
+            tableObject.destroy();
+            tableObject.save();
         },
         leancloudInit(){
             if(!AV.applicationId){
