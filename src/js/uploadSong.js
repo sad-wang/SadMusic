@@ -24,6 +24,7 @@
         },
         uploadSong(){
             document.querySelector('.upload').onclick=()=>{
+                window.eventHub.emit('displayUploadLists',{})
                 window.eventHub.emit('uploadSong', {})
             }
         },

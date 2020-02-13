@@ -9,32 +9,36 @@
                 <ol class="lists-items" id="libraryLists" ></ol>
                 <ol class="lists-items none" id="uploadLists"></ol>
         `,
-        render(data){
+        render(){
             $(this.el).html(this.template)
         },
     }
-    let model = {
-        data: {
-            displayingList: 'libraryLists'
-        },
-    }
+    let model = {}
     let controller = {
         init(view,model){
             this.view = view
             this.model = model
             this.view.render(this.model.data)
             this.bindEvent()
+            window.eventHub.on('displayUploadLists',()=>{
+                this.displayLibrary()
+            })
         },
         bindEvent(){
-            $(this.view.el + ' .tab').map((index)=>{
-                $(this.view.el + ' .tab')[index].onclick = (e)=>{
-                    $(this.view.el +  ' .tab').removeClass('active')
-                    $(this.view.el +' .tab')[index].classList.add('active')
-                    $(this.view.el + ' .lists-items').addClass('none')
-                    $(this.view.el + ' .lists-items')[index].classList.remove("none")
-                }
-            })
-        }
+            $('#libraryTab')[0].onclick = ()=>{
+                this.displayWhich('library')
+                window.eventHub.emit('getLeanCloudLists',{})
+            }
+            $('#uploadTab')[0].onclick = ()=>{
+                this.displayWhich('upload')
+            }
+        },
+        displayWhich(id){
+            $(this.view.el +  ' .tab').removeClass('active')
+            $(this.view.el + ' .lists-items').addClass('none')
+            $(this.view.el +' #'+ id +'Tab').addClass('active')
+            $(this.view.el + ' #'+ id +'Lists').removeClass("none")
+        },
     }
     controller.init(view,model)
 }

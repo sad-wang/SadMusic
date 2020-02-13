@@ -75,6 +75,12 @@
             this.model = model
             this.view.render(this.model.data)
             this.leancloudInit()
+            this.getLeanCloudLists()
+            window.eventHub.on('getLeanCloudLists',()=>{
+                this.getLeanCloudLists()
+            })
+        },
+        getLeanCloudLists() {
             this.model.init().then(()=>{
                 this.view.render(this.model.data)
                 this.bindEvent()
