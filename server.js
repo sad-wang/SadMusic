@@ -1,47 +1,79 @@
-var http = require('http')
-var fs = require('fs')
-var url = require('url')
-var port = process.argv[2]
-var qiniu = require('qiniu')
+let http = require('http')
+let url = require('url')
+let fs = require('fs')
+let querystring = require('querystring')
+let util = require('util')
+let qiniu = require('qiniu')
+
+let port = process.argv[2]
 
 if(!port){
-    console.log('请指定端口号好不啦？\nnode server.js 8888 这样不会吗？')
+    console.log('请指定端口号\n比如 node server.js 8888')
     process.exit(1)
 }
 
-var server = http.createServer(function(request, response){
-    var parsedUrl = url.parse(request.url, true)
-    var path = request.url
-    var query = ''
-    if(path.indexOf('?') >= 0){ query = path.substring(path.indexOf('?')) }
-    var pathNoQuery = parsedUrl.pathname
-    var queryObject = parsedUrl.query
-    var method = request.method
-    /******** 从这里开始看，上面不要看 ************/
-    console.log('得到 HTTP 路径\n' + path)
-    if(path == "/token"){
-        response.setHeader('Content-Type','text/css; charset=utf-8')
-        response.setHeader('Access-Control-Allow-Origin','*')
-
-        var config  = fs.readFileSync('./qiniu_key.json')
+let server = http.createServer(function(request, response){
+    let parsedUrl = url.parse(request.url,true)
+    let path = parsedUrl.pathname
+    let method = request.method
+    /* init qiniu and return mac */
+    let getMac = ()=>{
+        let config  = fs.readFileSync('./qiniu_key.json')
         config = JSON.parse(config)
-
-        let {accessKey, secretKey} = config;
-        var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
-
-        var options = {
-            scope: 'sadmusic',
-        };
-        var putPolicy = new qiniu.rs.PutPolicy(options);
-        var uploadToken=putPolicy.uploadToken(mac);
-
+        let {accessKey, secretKey} = config
+        let mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
+        return mac
+    }
+    let getToken = (bucket)=>{
+        let options = {
+            scope: bucket,
+        }
+        let mac = getMac()
+        let putPolicy = new qiniu.rs.PutPolicy(options)
+        return putPolicy.uploadToken(mac)
+    }
+    let initBucketManager = ()=>{
+        let mac = getMac()
+        let config = new qiniu.conf.Config()
+        config.zone = qiniu.zone.Zone_z0
+        let bucketManager = new qiniu.rs.BucketManager(mac, config)
+        return bucketManager
+    }
+    let deleteFile = (bucket,key)=>{
+        let bucketManager = initBucketManager()
+        bucketManager.delete(bucket, key, function(err, respBody, respInfo) {
+            if (err) {
+                console.log(err)
+                //throw err
+            } else {
+                console.log(respInfo.statusCode)
+                console.log(respBody)
+                response.end()
+            }
+        })
+    }
+    if(path == "/token"){
+        console.log('✔ 成功请求 http://localhost:' + port + path)
+        response.setHeader('Access-Control-Allow-Origin','*')
+        let uploadToken = getToken('sadmusic')
         response.write(`{"token": "${uploadToken}"}`)
         response.end()
+    }else if(path == "/delete" && method =="POST"){
+        console.log('✔ 成功请求 http://localhost:' + port + path)
+        response.setHeader('Access-Control-Allow-Origin','*')
+        let data = ''
+        request.on('data', function (chunk) {
+            data += chunk
+        })
+        request.on('end', function () {
+            data = querystring.parse(data)
+            deleteFile('sadmusic',data.key)
+        })
     }else{
+        console.log('❌ 无法请求 http://localhost:' + port + path)
         response.statusCode = 404
         response.end()
     }
-    /******** 代码结束，下面不要看 ************/
 })
 server.listen(port)
-console.log('监听 ' + port + ' 成功\nhttp://localhost:' + port)
+console.log('💻 监听' + 'http://localhost:' + port + ' 成功 ✔')

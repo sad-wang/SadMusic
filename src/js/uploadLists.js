@@ -14,7 +14,7 @@
              <input style="display: none"  type="file"/>
         `,
         songTemplate:`            
-            <li class="item">
+            <li class="item item-content">
                 <input class="item-file" value="__file_name__" disabled>
                 <input class="item-song_name" value="__song_name__">
                 <input class="item-singer" value="__singer__">
@@ -109,18 +109,18 @@
         },
         bindInputEvent(data,index){
             data.map((string)=>{
-                $('input.item-'+string)[index].onchange=(e)=>{
+                $('.item-content input.item-'+string)[index].onchange=(e)=>{
                     this.model.setSong(index,string,e.target.value)
                 }
             })
         },
         uploadSong(port,domain,file,table_name,data){
-            this.qiniuUpload(port,domain,file)
+            this.qiniuUpload(port,domain,file,data.song_name)
             this.leancloudUpload(table_name,data)
         },
-        qiniuUpload(port,domain,file){
+        qiniuUpload(port,domain,file,key){
             this.qiniuInit(port,domain,file)
-            qiniu.upload(this.file, this.key, this.token, this.putExtra, this.config).subscribe(this.observer)
+            qiniu.upload(this.file, key, this.token, this.putExtra, this.config).subscribe(this.observer)
         },
         leancloudUpload(table_name,data){
             this.leancloudInit()
@@ -145,7 +145,6 @@
             this.token = this.getToken(port)
             this.domain = domain
             this.file = file
-            this.key = file.name
             this.config = {
                 useCdnDomain: true,
                 disableStatisticsReport: false,

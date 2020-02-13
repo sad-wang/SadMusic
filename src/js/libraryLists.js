@@ -75,19 +75,27 @@
                 this.bindDelete(index)
             }
         },
-        bindEdit(index) {
-
-        },
+        bindEdit(index) {},
         bindDelete(index) {
             $(this.view.el + ' .delete-icon')[index].onclick=()=>{
+                this.qiniuDelete(this.model.data.songLists[index].song_name)
                 this.leancloudDelete('song_list',this.model.data.songLists[index].objectId)
                 this.model.data.songLists = this.model.data.songLists.filter(function(){
                     let i = arguments[1]
                     return i != index
                 })
                 this.view.render(this.model.data)
-                this.bindEvent()
+                this.bindEvent(/*此功能来日方长*/)
             }
+        },
+        qiniuDelete(key){
+            $.ajax({
+                url: 'http://127.0.0.1:9000/delete',
+                type: 'post',
+                data:{
+                  key:key
+                },
+            })
         },
         leancloudDelete(table_name,objectId){
             let tableObject = AV.Object.createWithoutData(table_name, objectId);
