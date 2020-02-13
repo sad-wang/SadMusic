@@ -54,7 +54,6 @@ let server = http.createServer(function(request, response){
     }
     if(path == "/token"){
         console.log('✔ 成功请求 http://localhost:' + port + path)
-        response.setHeader('Access-Control-Allow-Origin','*')
         let uploadToken = getToken('sadmusic')
         response.write(`{"token": "${uploadToken}"}`)
         response.end()
