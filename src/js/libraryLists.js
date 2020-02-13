@@ -29,9 +29,20 @@
                 </div>
             </li>
         `,
+        emptyTemplate:`
+            <div class="listsIsNull">
+                <svg class="icon edit-icon" aria-hidden="true">
+                    <use xlink:href="#icon-tuya-"></use>
+                </svg>
+                音乐库空啦！
+            </div>
+        `,
         render(data){
             let html = this.template
             let placeholders = ['song_name','singer','album','url']
+            if(!data.songLists.length){
+                html += this.emptyTemplate
+            }
             for(let index in data.songLists){
                 html += this.songTemplate
                 placeholders.map((string)=>{
@@ -55,7 +66,7 @@
                 })
             }.bind(this), function(error) {
                 console.log('查询 songLists 失败: ' + error)
-            });
+            })
         }
     }
     let controller = {
@@ -98,9 +109,9 @@
             })
         },
         leancloudDelete(table_name,objectId){
-            let tableObject = AV.Object.createWithoutData(table_name, objectId);
-            tableObject.destroy();
-            tableObject.save();
+            let tableObject = AV.Object.createWithoutData(table_name, objectId)
+            tableObject.destroy()
+            tableObject.save()
         },
         leancloudInit(){
             if(!AV.applicationId){

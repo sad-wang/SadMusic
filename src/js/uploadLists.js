@@ -29,9 +29,20 @@
                 </div>
             </li> 
         `,
+        emptyTemplate:`
+            <div class="listsIsNull">
+                <svg class="icon edit-icon" aria-hidden="true">
+                    <use xlink:href="#icon-shangchuan"></use>
+                </svg>
+                上传列表为空，快去上传音乐啊！
+            </div>
+        `,
         render(data){
             let html = this.template
             let placeholders = ['file_name', 'song_name', 'singer', 'album']
+            if(!data.songLists.length){
+                html += this.emptyTemplate
+            }
             for(let index in data.songLists){
                 html += this.songTemplate
                 placeholders.map((string)=>{
@@ -63,10 +74,10 @@
         init(view,model){
             this.view = view
             this.model = model
-            this.view.render(this.model.data);
+            this.view.render(this.model.data)
             window.eventHub.on('uploadSong',()=>{
                 this.createSong()
-            });
+            })
         },
         createSong(){
             $('input[type="file"]').click().change((e)=>{
@@ -88,7 +99,7 @@
         bindUpload(index){
             $('.upload-icon')[index].onclick=()=>{
                 let song = this.model.data.songLists[index]
-                let songWithoutFileAndFile_name = JSON.parse(JSON.stringify(song));
+                let songWithoutFileAndFile_name = JSON.parse(JSON.stringify(song))
                 delete songWithoutFileAndFile_name.file
                 delete songWithoutFileAndFile_name.file_name
                 this.uploadSong(
@@ -101,8 +112,8 @@
             $(this.view.el + ' .delete-icon')[index].onclick=()=>{
                 this.model.data.songLists = this.model.data.songLists.filter(function(){
                     let i = arguments[1]
-                    return i != index ;
-                });
+                    return i != index
+                })
                 this.view.render(this.model.data)
                 this.bindEvent()
             }

@@ -1,7 +1,7 @@
 /*init css*/
 * {padding: 0;margin: 0;box-sizing: border-box;cursor: default;user-select: none;}
 /*init icon*/
-.icon {width: 1.2em;height: 1.2em;fill: currentColor;overflow: hidden;cursor: pointer}
+.icon {width: 1.2em;height: 1.2em;fill: currentColor;overflow: hidden;cursor: pointer;margin-right: 10px;}
 /*admin style*/
 body {background-image: url(../images/back.jpg);background-attachment: fixed;background-size: cover;background-position: center;color: #fff;display: flex;flex-direction: column;justify-content: center;align-items: center;}
 body main {width: 87vw;display: flex;flex-direction: column;justify-content: center;align-items: center;padding-bottom: 15vh;}
@@ -9,7 +9,6 @@ body main .top {height: 13vh;width: 100%;font-weight: bold;display: flex;flex-di
 body main .top h1{display: inline-block;font-size: 25px;}
 body main .top h1:after{content: '';display: block;width: 45%;height: 5px;background-color: #fc166f;margin-top: 13px;border-radius: 3px;}
 body main .top .upload {width: 205px;height: 43px;background-color: #fc166f;font-size: 15px;font-weight: bold;letter-spacing: 2px;border-radius: 4px;transform : scale(0.73,0.73);display: flex;flex-direction: row;align-items: center;justify-content: center;cursor: pointer;}
-body main .top .upload .icon{margin-right: 10px}
 body main .lists {width: 100%;}
 body main .lists .lists-tab {width: 100%;display: flex;flex-direction: row;}
 body main .lists .lists-tab .tab {font-size: 13px;font-weight: bold;letter-spacing: 2px;border-radius: 4px;display: flex;flex-direction: row;align-items: center;justify-content: center;border: solid 1px #fff;padding: 5px 25px;margin-right: 10px;cursor: pointer;}
@@ -26,4 +25,15 @@ body main .lists .lists-items .item input {background-color: #ffffff00;border: n
 body main .lists .lists-items .item input:focus {cursor: text}
 body main .lists .lists-items .item-title input {letter-spacing: 1em;cursor: default}
 body main .lists .lists-items .item .item-action {display: flex;flex-direction: row;flex: 0.4;}
-body main .lists .lists-items .item .item-action .icon {vertical-align: -0.15em;margin-right: 10px;}
+.listsIsNull {
+    height: 25vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    line-height: 13px;
+    letter-spacing: 4px;
+    color: silver;
+    padding-right: calc(1.2em + 10px);
+}
