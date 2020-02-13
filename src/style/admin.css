@@ -23,6 +23,7 @@ body main .lists .lists-items .item-title:hover {background-color: #dddddd00;}
 body main .lists .lists-items .item .item-file,.item-song_name,.item-singer,.item-album,.item-url {white-space: nowrap;text-overflow: ellipsis;overflow: hidden;line-height: 33px;flex: 1;font-size: 13px;font-weight: lighter;color: white;}
 body main .lists .lists-items .item .item-url {flex: 3;padding-right: 30px;user-select: text;cursor: text;}
 body main .lists .lists-items .item input {background-color: #ffffff00;border: none;letter-spacing: 0.07em;display: inline;margin-right: 50px;cursor: pointer;}
+body main .lists .lists-items .item input:focus {cursor: text}
 body main .lists .lists-items .item-title input {letter-spacing: 1em;cursor: default}
 body main .lists .lists-items .item .item-action {display: flex;flex-direction: row;flex: 0.4;}
 body main .lists .lists-items .item .item-action .icon {vertical-align: -0.15em;margin-right: 10px;}
