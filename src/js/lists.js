@@ -21,7 +21,7 @@
             this.view.render(this.model.data)
             this.bindEvent()
             window.eventHub.on('displayUploadLists',()=>{
-                this.displayLibrary()
+                this.displayWhich('upload')
             })
         },
         bindEvent(){
