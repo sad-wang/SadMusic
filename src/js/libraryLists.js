@@ -32,41 +32,56 @@
         emptyTemplate:`
             <div class="listsIsNull">
                 <svg class="icon edit-icon" aria-hidden="true">
-                    <use xlink:href="#icon-tuya-"></use>
+                    <use xlink:href="__icon__"></use>
                 </svg>
-                音乐库空啦！
+                __content__
             </div>
         `,
         render(data){
             let html = this.template
             let placeholders = ['song_name','singer','album','url']
-            if(!data.songLists.length){
-                html += this.emptyTemplate
+            if (data.state == 'pulling'){
+                html += this.changeEmptyContent(`正在获取音乐库`,'#icon-tuya-')
             }
-            for(let index in data.songLists){
-                html += this.songTemplate
-                placeholders.map((string)=>{
-                    html = html.replace(`__${string}__`,data.songLists[index][string])
-                })
+            if (data.state == 'pulled'){
+                if(!data.songLists.length){
+                    html += this.changeEmptyContent(`音乐库空啦`,'#icon-tuya-')
+                }
+                for(let index in data.songLists){
+                    html += this.songTemplate
+                    placeholders.map((string)=>{
+                        html = html.replace(`__${string}__`,data.songLists[index][string])
+                    })
+                }
+            }
+            if (!data.state){
+                html += this.changeEmptyContent(`网络似乎出了问题`,'#icon-shanchu')
             }
             $(this.el).html(html)
+        },
+        changeEmptyContent(content,icon){
+            return this.emptyTemplate.replace(`__content__`,content).replace(`__icon__`,icon)
         }
     }
     let model = {
         data: {
-            songLists: []
+            songLists: [],
+            state: true
         },
         init(){
             let query = new AV.Query('song_list')
             let querySelect = ['objectId','song_name', 'singer','album','url',]
             query.select(querySelect)
             return query.find().then(function(results) {
+                console.log('✔ 获取 songLists 成功')
+                this.data.state = 'pulled'
                 this.data.songLists = results.map((obj) => {
                     return Object.assign(obj.attributes,{objectId:obj.id})
                 })
             }.bind(this), function(error) {
-                console.log('查询 songLists 失败: ' + error)
-            })
+                console.log('❌ 获取 songLists 失败: ' + error)
+                this.data.state = false
+            }.bind(this))
         }
     }
     let controller = {
@@ -81,6 +96,9 @@
             })
         },
         getLeanCloudLists() {
+            console.log('🚀 正在获取 songLists')
+            this.model.data.state = 'pulling'
+            this.view.render(this.model.data)
             this.model.init().then(()=>{
                 this.view.render(this.model.data)
                 this.bindEvent()
