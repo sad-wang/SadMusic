@@ -72,16 +72,16 @@
             let query = new AV.Query('song_list')
             let querySelect = ['objectId','song_name', 'singer','album','url',]
             query.select(querySelect)
-            return query.find().then(function(results) {
+            return query.find().then((results) => {
                 console.log('✔ 获取 songLists 成功')
                 this.data.state = 'pulled'
                 this.data.songLists = results.map((obj) => {
                     return Object.assign(obj.attributes,{objectId:obj.id})
                 })
-            }.bind(this), function(error) {
+            }, (error) => {
                 console.log('❌ 获取 songLists 失败: ' + error)
                 this.data.state = false
-            }.bind(this))
+            })
         }
     }
     let controller = {
