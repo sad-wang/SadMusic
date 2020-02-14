@@ -124,12 +124,16 @@
             }
         },
         qiniuDelete(key){
+            console.log('🚀 请求删除中')
             $.ajax({
                 url: 'http://127.0.0.1:9000/delete',
                 type: 'post',
                 data:{
                   key:key
                 },
+                error:()=>{
+                    console.log('❌ 请求删除失败')
+                }
             })
         },
         leancloudDelete(table_name,objectId){

@@ -36,13 +36,13 @@ let initBucketManager = ()=>{
 /* delete the file in bucket whose filename is key */
 let deleteFile = (bucket,key)=>{
     let bucketManager = initBucketManager()
-    bucketManager.delete(bucket, key, function(err, respBody, respInfo) {
+    return bucketManager.delete(bucket, key, function(err, respBody, respInfo) {
         if (err) {
             console.log(err)
+            return err
         } else {
             console.log(respInfo.statusCode)
-            console.log(respBody)
-            response.end()
+            return respInfo
         }
     })
 }
@@ -52,6 +52,7 @@ http.createServer(function(request, response){
     let method = request.method
     if(path == "/token"){
         console.log('✔ 成功请求 http://localhost:' + port + path)
+        response.setHeader('Access-Control-Allow-Origin','*')
         let uploadToken = getToken('sadmusic')
         response.write(`{"token": "${uploadToken}"}`)
         response.end()
@@ -64,7 +65,8 @@ http.createServer(function(request, response){
         })
         request.on('end', function () {
             data = querystring.parse(data)
-            deleteFile('sadmusic',data.key)
+            response.write(console.log('⏳ 正在删除'))
+            response.write(console.log('删除状态： '+deleteFile('sadmusic',data.key)))
         })
     }else{
         console.log('❌ 无法请求 http://localhost:' + port + path)

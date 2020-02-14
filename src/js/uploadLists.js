@@ -130,8 +130,8 @@
             this.leancloudUpload(table_name,data)
         },
         qiniuUpload(port,domain,file,key){
-            this.qiniuInit(port,domain,file)
-            qiniu.upload(this.file, key, this.token, this.putExtra, this.config).subscribe(this.observer)
+            window.qiniuUpload.init(port,domain,file,key)
+            window.qiniuUpload.upload()
         },
         leancloudUpload(table_name,data){
             this.leancloudInit()
@@ -151,47 +151,6 @@
                     serverURLs: "https://nfptnwam.lc-cn-n1-shared.com"
                 })
             }
-        },
-        qiniuInit(port,domain,file){
-            this.token = this.getToken(port)
-            this.domain = domain
-            this.file = file
-            this.config = {
-                useCdnDomain: true,
-                disableStatisticsReport: false,
-                retryCount: 6,
-                region: null
-            }
-            this.putExtra = {
-                fname: "",
-                params: {},
-                mimeType: null
-            }
-            this.observer = {
-                next(res){
-                    console.log(file.name +' is uploading~')
-                },
-                error(err){
-                    console.log(file.name + ' upload failed!')
-                    console.log(err.message)
-                },
-                complete(res){
-                    let fileUrl = 'http://' + domain + '/' + encodeURI(res.key)
-                    console.log(file.name + 'was upload completed!')
-                    console.log(file.name + ' url: '+  fileUrl)
-                }
-            }
-        },
-        getToken(port){
-            let token
-            $.ajax({
-                async: false,
-                url: 'http://127.0.0.1:'+port+'/token',
-                success: function(res){
-                    token = JSON.parse(res).token
-                }
-            })
-            return token
         },
     }
     controller.init(view,model)
