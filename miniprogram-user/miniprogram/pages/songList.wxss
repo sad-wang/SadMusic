@@ -55,17 +55,21 @@ view{  box-sizing: border-box;}
     border-bottom-color: #242729;
 }
 .container .lists{
-    padding: 0 65rpx;
     display: flex;
     flex-direction: column;
-    padding-top: 20rpx;
-    width: 100%;
+    padding-top: 62rpx;
+    width: 620rpx;
 }
 .container .lists .lists-item{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-top: 42rpx;
+    padding-bottom: 42rpx;
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
 }
 .container .lists .lists-item .item-id{
     color: #dbdcdc;
