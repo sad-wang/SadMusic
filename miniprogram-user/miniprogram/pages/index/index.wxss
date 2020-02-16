@@ -6,6 +6,7 @@ view{  box-sizing: border-box;}
   align-items: center;
   box-sizing: border-box;
   background: linear-gradient(rgba(53,58,63,1) 0%, rgba(28,30,33,1) 100%);
+  height: 90vh;
 }
 .container .head {
   height: 16.5vh;
@@ -32,8 +33,8 @@ view{  box-sizing: border-box;}
   font-size: 22rpx;
 }
 .container .head .avatar {
-  width: 7.5vh;
-  height: 7.5vh;
+  width: 95rpx;
+  height: 95rpx;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
@@ -172,6 +173,8 @@ view{  box-sizing: border-box;}
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  bottom: 0vh;
 }
 .playing .song{
   display: flex;
@@ -268,7 +271,6 @@ view{  box-sizing: border-box;}
   top:-10rpx;
   display: block;
 }
-
 .heart-solid.icon {
   color: #e23c3c;
   position: absolute;
