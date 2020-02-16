@@ -1,59 +1,87 @@
 <!--index.wxml-->
 <view class="container">
 
-  <!-- 用户 openid -->
-  <view class="userinfo">
-    <button 
-      open-type="getUserInfo" 
-      bindgetuserinfo="onGetUserInfo"
-      class="userinfo-avatar"
-      style="background-image: url({{avatarUrl}})"
-      size="default"
-    ></button>
-    <view class="userinfo-nickname-wrapper">
-      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+<!-- 用户 openid -->
+<!--  <view class="userinfo">-->
+
+<!--    <view class="userinfo-nickname-wrapper">-->
+<!--      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>-->
+<!--    </view>-->
+<!--  </view>-->
+  <view class="head">
+    <view class="sadmusic">
+      <view class="name">Sad Music</view>
+      <view class="slogan">在这里，每天都会推荐好听的音乐🎵</view>
+    </view>
+    <view
+            open-type="getUserInfo"
+            bindgetuserinfo="onGetUserInfo"
+            class="avatar"
+            style="background-image: url({{avatarUrl}})"
+            size="default"
+    ></view>
+  </view>
+  <view class="favorites">
+    <view class="favorites-item">
+      <div class="heart">
+        <div class="heart-solid icon"></div>
+      </div>
+      <view class="content">
+        <view class="content-left">
+          <view class="left-top">Favorites</view>
+          <view class="left-bottom">Filip Legierski</view>
+        </view>
+        <view class="content-right">
+          <view class="right-top">356</view>
+          <view class="right-bottom">Songs</view>
+        </view>
+      </view>
     </view>
   </view>
+  <view class="recommend">
+    <view class="recommend-title">Recommended</view>
+    <scroll-view scroll-x enable-flex class="recommend-cards">
+        <view class="cards-item">
+          <item class="date">2/17 2020</item>
+          <item class="content">
+            <view class="label">摇滚 </view>
+            <view class="count">5 Songs</view>
+          </item>
+        </view>
+      <view class="cards-item">
+        <item class="date">2/17 2020</item>
+        <item class="content">
+          <view class="label">摇滚 | hiphop | 粤语 | 流行</view>
+          <view class="count">5 Songs</view>
+        </item>
+      </view>
+      <view class="cards-item">
+        <item class="date">2/17 2020</item>
+        <item class="content">
+          <view class="label">摇滚 | hiphop | 粤语 | 流行</view>
+          <view class="count">5 Songs</view>
+        </item>
+      </view>
+      <view class="cards-item">
+        <item class="date">2/17 2020</item>
+        <item class="content">
+          <view class="label">摇滚 | hiphop | 粤语 | 流行</view>
+          <view class="count">5 Songs</view>
+        </item>
 
-
-  <!-- 上传图片 -->
-  <view class="uploader">
-    <view class="uploader-text" bindtap="doUpload">
-      <text>上传图片</text>
-    </view>
-    <view class="uploader-container" wx:if="{{imgUrl}}">
-      <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
-    </view>
+      </view>
+      <view style="display: inline-block" class="fuck">testest</view>
+    </scroll-view>
   </view>
-
-
-  <!-- 操作数据库 -->
-  <view class="uploader">
-    <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
-      <text>前端操作数据库</text>
-    </navigator>
+</view>
+<view class="playing">
+  <view class="song">
+    <view class="song-name">Lose It</view>
+    <view class="song-singer">Flume · Vic Mensa</view>
   </view>
-
-  <!-- 即时通信 -->
-  <view class="uploader">
-    <navigator url="../im/im" open-type="navigate" class="uploader-text">
-      <text>即时通信 Demo</text>
-    </navigator>
+  <view class="actions">
+    <view class="last"></view>
+    <view class="play"></view>
+    <view class="next"></view>
   </view>
-
-  <!-- 新建云函数 -->
-  <view class="uploader">
-    <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
-      <text>快速新建云函数</text>
-    </navigator>
-  </view>
-
-  <!-- 云调用 -->
-  <view class="uploader">
-    <navigator url="../openapi/openapi" open-type="navigate" class="uploader-text">
-      <text>云调用</text>
-    </navigator>
-  </view>
-
-
 </view>
