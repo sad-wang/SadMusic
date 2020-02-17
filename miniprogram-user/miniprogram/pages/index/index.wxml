@@ -13,13 +13,13 @@
       <view class="name">Sad Music</view>
       <view class="slogan">在这里，每天都会推荐好听的音乐🎵</view>
     </view>
-    <view
+    <button
             open-type="getUserInfo"
             bindgetuserinfo="onGetUserInfo"
             class="avatar"
             style="background-image: url({{avatarUrl}})"
             size="default"
-    ></view>
+    ></button>
   </view>
   <view class="favorites" bindtap="navTo">
     <view class="favorites-item">

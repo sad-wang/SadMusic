@@ -1,7 +1,8 @@
 /**app.wxss**/
 page {
-  background: #f6f6f6;
+  background: linear-gradient(rgba(53,58,63,1) 0%, rgba(28,30,33,1) 100%) no-repeat;  
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  height: 100vh
 }

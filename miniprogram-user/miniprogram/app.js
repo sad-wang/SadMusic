@@ -1,7 +1,24 @@
 //app.js
 App({
+  eventHub:{
+    events:{},
+    emit(eventName,data){
+      for (let key in this.events){
+        if (key === eventName){
+          let fnList = this.events[key];
+          fnList.map((fn)=>{
+            fn.call(undefined,data)
+          })
+        }
+      }
+    },
+    on(eventName,fn){
+      if (this.events[eventName] === undefined)
+        this.events[eventName] = []
+      this.events[eventName].push(fn)
+    },
+  },
   onLaunch: function () {
-    
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -13,8 +30,9 @@ App({
         // env: 'my-env-id',
         traceUser: true,
       })
-    }
 
+    }
     this.globalData = {}
-  }
+  },
+
 })

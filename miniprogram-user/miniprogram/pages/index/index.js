@@ -1,6 +1,5 @@
 //index.js
 const app = getApp()
-
 Page({
   data: {
     avatarUrl: './user-unlogin.png',
@@ -18,17 +17,12 @@ Page({
       url: '../playing/playing'})
   },
   onLoad: function() {
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '../chooseLib/chooseLib',
-      })
-      return
-    }
-
+    console.log(app.eventHub)
     // 获取用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
+          console.log(2)
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
@@ -42,7 +36,6 @@ Page({
       }
     })
   },
-
   onGetUserInfo: function(e) {
     if (!this.data.logged && e.detail.userInfo) {
       this.setData({
@@ -52,7 +45,6 @@ Page({
       })
     }
   },
-
   onGetOpenid: function() {
     // 调用云函数
     wx.cloud.callFunction({
@@ -64,11 +56,7 @@ Page({
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
-
       }
     })
   },
-
-
-
 })

@@ -38,6 +38,8 @@ view{  box-sizing: border-box;}
   border-radius: 50%;
   background-size: cover;
   background-position: center;
+  padding: 0;
+  margin: 0;
 }
 .container .favorites {
   height: 31vh;
