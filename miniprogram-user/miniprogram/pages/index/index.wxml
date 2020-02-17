@@ -13,7 +13,7 @@
             size="default"
     ></button>
   </view>
-  <view class="favorites" bindtap="navTo" data-url="../songList/songList">
+  <view class="favorites"  bindtap="toFavorites">
     <view class="favorites-item">
       <div class="heart">
         <div class="heart-solid icon"></div>
@@ -24,7 +24,7 @@
           <view class="left-bottom">{{userInfo.nickName}}</view>
         </view>
         <view class="content-right">
-          <view class="right-top">{{count}}</view>
+          <view class="right-top">{{favoritesLists.length}}</view>
           <view class="right-bottom">Songs</view>
         </view>
       </view>
@@ -33,7 +33,7 @@
   <view class="recommend">
     <view class="recommend-title">Recommended</view>
     <scroll-view scroll-x enable-flex class="recommend-cards">
-        <view class="cards-item" bindtap="navTo" data-url="../songList/songList" wx:for="{{recommendLists}}" wx:key="key" wx:for-item="item">
+        <view class="cards-item" wx:for="{{recommendLists}}" wx:key="key" wx:for-item="item">
           <item class="date">{{item.date}}</item>
           <item class="content">
             <view class="label">{{item.keywords}}</view>
@@ -45,7 +45,7 @@
   </view>
 </view>
 <view class="playing">
-  <view class="song" bindtap="navTo" data-url="../playing/playing">
+  <view class="song" >
     <view class="song-name">Lose It</view>
     <view class="song-singer">Flume · Vic Mensa</view>
   </view>

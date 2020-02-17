@@ -1,112 +1,24 @@
 <!--songList.wxml-->
+<!--songList.wxml-->
 <view class="container">
     <view class="head">
         <view class="title">
-            <view class="name">Favorites</view>
-            <view class="info">Filip Legierski</view>
+            <view class="name">{{title}}</view>
+            <view class="info">{{subtitle}}</view>
         </view>
         <div class="heart">
             <div class="heart-solid icon"></div>
         </div>
     </view>
     <scroll-view enable-flex scroll-y class="lists">
-        <view class="lists-item">
-            <view class="item-id">1</view>
+        <view class="lists-item" wx:for="{{songLists}}" wx:key="key" wx:for-item="item">
+            <view class="item-id">{{index+1}}</view>
             <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
+                <view class="song-name">{{item.song_name}}</view>
+                <view class="singer">{{item.singer}}</view>
             </view>
             <view class="item-play"></view>
         </view>
-        <view class="lists-item">
-            <view class="item-id">2</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">3</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">4</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">5</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">6</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">1</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">2</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">3</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">4</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">5</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-        <view class="lists-item">
-            <view class="item-id">6</view>
-            <view class="item-content">
-                <view class="song-name">Dance Monkey</view>
-                <view class="singer">Tones and I</view>
-            </view>
-            <view class="item-play"></view>
-        </view>
-
     </scroll-view>
 </view>
 <view class="playing">

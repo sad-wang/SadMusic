@@ -7,17 +7,21 @@ Page({
     userInfo: {},
     logged: false,
     recommendLists:[],
-    count:''
+    favoritesLists:[],
   },
-  navTo:function(e){
+  toFavorites:function() {
     wx.navigateTo({
-      url: e.currentTarget.dataset.url
+      url: '../songList/songList',
+      success: (res)=>{
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('songListData', {songData:this.data.favoritesLists,subtitle:this.data.userInfo.nickName,title:'Favorites'})
+      }
     })
   },
   onLoad: function() {
     this.getKnownUserInfo()
     this.getRecommendLists()
-    this.getUserFavoritesCount()
+    this.getUserFavoritesLists()
   },
   getKnownUserInfo:function() {
     wx.getSetting({
@@ -60,12 +64,12 @@ Page({
   //     }
   //   })
   // },
-  getUserFavoritesCount:function(){
-    db.collection('user').where({_openid: app.globalData.openid}).get().then(function(res){
+  getUserFavoritesLists:function(){
+    db.collection('user').where({_openid: app.globalData.openid}).get().then((res)=>{
       this.setData({
-        count: res.data[0].favorites.length
+        favoritesLists: res.data[0].favorites
       })
-    }.bind(this))
+    })
   },
   onGetUserInfo: function(e) {
     if (!this.data.logged && e.detail.userInfo) {
