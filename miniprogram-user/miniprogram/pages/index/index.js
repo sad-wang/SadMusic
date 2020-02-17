@@ -9,7 +9,10 @@ Page({
     takeSession: false,
     requestResult: ''
   },
-
+  navTo(){
+    wx.navigateTo({
+      url: '../songList'})
+  },
   onLoad: function() {
     if (!wx.cloud) {
       wx.redirectTo({

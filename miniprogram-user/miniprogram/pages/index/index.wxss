@@ -171,7 +171,6 @@ view{  box-sizing: border-box;}
   padding: 0 65rpx;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   position: fixed;
   bottom: 0vh;
@@ -179,6 +178,7 @@ view{  box-sizing: border-box;}
 .playing .song{
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 .playing .song .song-name{
   color: #949597;
@@ -211,7 +211,7 @@ view{  box-sizing: border-box;}
   border-color: transparent #818588 transparent transparent;
   content: '';
   left: -20rpx;
-  top:-10rpx;
+  top:-11rpx;
   display: block;
 }
 .playing .actions .play{
@@ -247,7 +247,7 @@ view{  box-sizing: border-box;}
   width: 0;
   height: 24rpx;
   border-style: double;
-  border-width: 0px 0px 0px 10px;
+  border-width: 0px 0px 0px 20rpx;
   left: 18rpx;
   top: 13rpx;
 }
@@ -268,7 +268,7 @@ view{  box-sizing: border-box;}
   border-color: transparent transparent transparent #818588;
   content: '';
   right: 0rpx;
-  top:-10rpx;
+  top: -11rpx;
   display: block;
 }
 .heart-solid.icon {

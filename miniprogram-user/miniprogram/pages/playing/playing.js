@@ -1,4 +1,4 @@
-// miniprogram/pages/songList.js
+// miniprogram/pages/playing/playing.js
 Page({
 
   /**

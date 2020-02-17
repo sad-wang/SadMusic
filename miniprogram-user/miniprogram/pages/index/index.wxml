@@ -21,7 +21,7 @@
             size="default"
     ></view>
   </view>
-  <view class="favorites">
+  <view class="favorites" bindtap="navTo">
     <view class="favorites-item">
       <div class="heart">
         <div class="heart-solid icon"></div>

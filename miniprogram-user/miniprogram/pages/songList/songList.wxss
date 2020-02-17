@@ -55,16 +55,15 @@ view{  box-sizing: border-box;}
     border-bottom-color: #242729;
 }
 .container .lists{
-    display: flex;
-    flex-direction: column;
-    padding-top: 62rpx;
-    width: 620rpx;
+    padding-top: 40rpx;
+    width: 100%;
+    height: 73.5vh;
 }
 .container .lists .lists-item{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-bottom: 42rpx;
+    padding: 21rpx 0;
 }
 ::-webkit-scrollbar {
     width: 0;
@@ -89,6 +88,7 @@ view{  box-sizing: border-box;}
     text-align: center;
     line-height: 50rpx;
     margin-right: 34rpx;
+    margin-left: 65rpx;
 }
 .container .lists .lists-item .item-content{
     display: flex;
@@ -118,6 +118,7 @@ view{  box-sizing: border-box;}
     border-top-color: #24272b;
     border-bottom-color: #242729;
     border-radius: 50%;
+    right: 65rpx;
 }
 .container .lists .lists-item .item-play::after{
     position: relative;
@@ -132,8 +133,6 @@ view{  box-sizing: border-box;}
     display: block;
 }
 .playing {
-    position: fixed;
-    bottom: 0vh;
     box-shadow: 0rpx -4rpx #272b2f, 0rpx -4rpx #23272b, 0rpx -4rpx #292d31, 0rpx -4rpx #272b2f, 0rpx -4rpx #23272b, 0rpx -4rpx #26292d, 0rpx -4rpx #2b2e32, 0rpx -4rpx #2d3136;
     height: 10vh;
     width: 100%;
@@ -143,6 +142,8 @@ view{  box-sizing: border-box;}
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    bottom: 0vh;
 }
 .playing .song{
     display: flex;
@@ -179,7 +180,7 @@ view{  box-sizing: border-box;}
     border-color: transparent #818588 transparent transparent;
     content: '';
     left: -20rpx;
-    top:-10rpx;
+    top:-11rpx;
     display: block;
 }
 .playing .actions .play{
@@ -215,7 +216,7 @@ view{  box-sizing: border-box;}
     width: 0;
     height: 24rpx;
     border-style: double;
-    border-width: 0px 0px 0px 10px;
+    border-width: 0px 0px 0px 20rpx;
     left: 18rpx;
     top: 13rpx;
 }
@@ -236,7 +237,7 @@ view{  box-sizing: border-box;}
     border-color: transparent transparent transparent #818588;
     content: '';
     right: 0rpx;
-    top:-10rpx;
+    top: -11rpx;
     display: block;
 }
 .heart-solid.icon {

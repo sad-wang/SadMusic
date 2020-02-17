@@ -1,11 +1,13 @@
 {
   "pages": [
-    "pages/songList",
-    "pages/index/index"
+            "pages/index/index",
+            "pages/songList/songList",
+            "pages/playing/playing"
 
+       
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#353a3f",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "云开发 QuickStart",

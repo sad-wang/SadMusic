@@ -1,4 +1,9 @@
 {
   "usingComponents": {},
-  "disableScroll": true
+  "disableScroll": true,
+  "navigationBarBackgroundColor": "#353a3f",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "SadMusic",
+  "backgroundColor": "#353a3f",
+  "backgroundTextStyle": "dark"
 }

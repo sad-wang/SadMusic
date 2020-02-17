@@ -1,0 +1,27 @@
+<!--playing.wxml-->
+<view class="container">
+    <view class="navTab">
+        <view class="tab-Item">歌曲</view>
+        <text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text>
+        |
+        <text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text>
+        <view class="tab-Item">歌词</view>
+    </view>
+    <view class="main">
+        <view class="rolling"></view>
+        <view class="song">
+            <view class="song-name">Low Life</view>
+            <view class="song-singer">Future ft. The Weeknd</view>
+        </view>
+        <progress></progress>
+    </view>
+    <view class="actions">
+        <view class="last"></view>
+        <view class="play"></view>
+        <view class="next"></view>
+    </view>
+    <view class="option">
+        <view class="order"></view>
+        <view class="lists"></view>
+    </view>
+</view>
