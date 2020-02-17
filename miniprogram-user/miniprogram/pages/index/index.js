@@ -9,9 +9,9 @@ Page({
     recommendLists:[],
     count:''
   },
-  navTo(url){
+  navTo:function(e){
     wx.navigateTo({
-      url: url
+      url: e.currentTarget.dataset.url
     })
   },
   onLoad: function() {
@@ -38,8 +38,15 @@ Page({
   getRecommendLists:function(){
     const db = wx.cloud.database()
     db.collection('recommend').get().then(function(res) {
+      let result = res.data
+      result.map((item)=>{
+        let date = item.date
+        date = date.getFullYear() + '-' + (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' + date.getDate()
+        item.date = date
+        Object.assign(item,{count:item.songs.length})
+      })
       this.setData({
-        recommendLists: res.data
+        recommendLists: result
       })
     }.bind(this))
   },

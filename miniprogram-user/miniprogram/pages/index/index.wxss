@@ -83,6 +83,7 @@ view{  box-sizing: border-box;}
   justify-content: space-between;
 }
 .container .favorites .favorites-item .content .content-left{
+  margin-left: 15rpx;
   display: flex;
   flex-direction: column;
 }
@@ -98,16 +99,18 @@ view{  box-sizing: border-box;}
 .container .favorites .favorites-item .content .content-right{
   display: flex;
   flex-direction: column;
+  margin-right: 15rpx;
 }
 .container .favorites .favorites-item .content .content-right .right-top{
   color: #cfd1d2;
   font-size: 24rpx;
   font-weight: bolder;
+  text-align: right;
 }
 .container .favorites .favorites-item .content .content-right .right-bottom{
   color: #808183;
   font-size: 22rpx;
-
+  text-align: right;
 }
 .container .recommend {
   height: 42.5vh;
@@ -145,11 +148,12 @@ view{  box-sizing: border-box;}
   padding: 0 45rpx;
 }
 .container .recommend .recommend-cards .cards-item .date{
-  color: #a4a6a7;
+  color: #dbdcdd;
   font-size: 26rpx;
   flex: 2;
   display: flex;
   align-items: center;
+  font-weight: bolder;
 }
 .container .recommend .recommend-cards .cards-item .content{
   display: flex;

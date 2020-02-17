@@ -13,7 +13,7 @@
             size="default"
     ></button>
   </view>
-  <view class="favorites" bindtap="navTo('../songList/songList')">
+  <view class="favorites" bindtap="navTo" data-url="../songList/songList">
     <view class="favorites-item">
       <div class="heart">
         <div class="heart-solid icon"></div>
@@ -21,10 +21,10 @@
       <view class="content">
         <view class="content-left">
           <view class="left-top">Favorites</view>
-          <view class="left-bottom">Filip Legierski</view>
+          <view class="left-bottom">{{userInfo.nickName}}</view>
         </view>
         <view class="content-right">
-          <view class="right-top">356</view>
+          <view class="right-top">{{count}}</view>
           <view class="right-bottom">Songs</view>
         </view>
       </view>
@@ -33,41 +33,19 @@
   <view class="recommend">
     <view class="recommend-title">Recommended</view>
     <scroll-view scroll-x enable-flex class="recommend-cards">
-        <view class="cards-item" bindtap="navTo('../songList/songList')">
-          <item class="date">2/17 2020</item>
+        <view class="cards-item" bindtap="navTo" data-url="../songList/songList" wx:for="{{recommendLists}}" wx:key="key" wx:for-item="item">
+          <item class="date">{{item.date}}</item>
           <item class="content">
-            <view class="label">摇滚 </view>
-            <view class="count">5 Songs</view>
+            <view class="label">{{item.keywords}}</view>
+            <view class="count">{{item.count}} Songs</view>
           </item>
         </view>
-      <view class="cards-item">
-        <item class="date">2/17 2020</item>
-        <item class="content">
-          <view class="label">摇滚 | hiphop | 粤语 | 流行</view>
-          <view class="count">5 Songs</view>
-        </item>
-      </view>
-      <view class="cards-item">
-        <item class="date">2/17 2020</item>
-        <item class="content">
-          <view class="label">摇滚 | hiphop | 粤语 | 流行</view>
-          <view class="count">5 Songs</view>
-        </item>
-      </view>
-      <view class="cards-item">
-        <item class="date">2/17 2020</item>
-        <item class="content">
-          <view class="label">摇滚 | hiphop | 粤语 | 流行</view>
-          <view class="count">5 Songs</view>
-        </item>
-
-      </view>
       <view style="display: inline-block" class="fuck">testest</view>
     </scroll-view>
   </view>
 </view>
 <view class="playing">
-  <view class="song" bindtap="navTo('../playing/playing')">
+  <view class="song" bindtap="navTo" data-url="../playing/playing">
     <view class="song-name">Lose It</view>
     <view class="song-singer">Flume · Vic Mensa</view>
   </view>
