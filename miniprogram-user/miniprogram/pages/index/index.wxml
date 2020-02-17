@@ -33,7 +33,7 @@
   <view class="recommend">
     <view class="recommend-title">Recommended</view>
     <scroll-view scroll-x enable-flex class="recommend-cards">
-        <view class="cards-item" wx:for="{{recommendLists}}" wx:key="key" wx:for-item="item">
+        <view class="cards-item" data-index="{{index}}" wx:for="{{recommendLists}}" wx:key="key" wx:for-item="item" bindtap="toRecommend">
           <item class="date">{{item.date}}</item>
           <item class="content">
             <view class="label">{{item.keywords}}</view>

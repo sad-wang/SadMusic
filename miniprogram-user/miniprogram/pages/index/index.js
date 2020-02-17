@@ -18,6 +18,17 @@ Page({
       }
     })
   },
+  toRecommend:function(e){
+    let index = e.currentTarget.dataset.index
+    console.log(this.data.recommendLists[index])
+    wx.navigateTo({
+      url: '../songList/songList',
+      success: (res)=>{
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('songListData', {songData:this.data.recommendLists[index].songs,subtitle:this.data.recommendLists[index].keywords,title:this.data.recommendLists[index].date})
+      }
+    })
+  },
   onLoad: function() {
     this.getKnownUserInfo()
     this.getRecommendLists()
@@ -41,7 +52,7 @@ Page({
   },
   getRecommendLists:function(){
     const db = wx.cloud.database()
-    db.collection('recommend').get().then(function(res) {
+    db.collection('recommend').get().then((res)=>{
       let result = res.data
       result.map((item)=>{
         let date = item.date
@@ -52,7 +63,7 @@ Page({
       this.setData({
         recommendLists: result
       })
-    }.bind(this))
+    })
   },
   // aa:function(){
   //   db.collection('user').add({
