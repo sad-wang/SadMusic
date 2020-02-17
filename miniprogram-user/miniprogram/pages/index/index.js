@@ -11,7 +11,11 @@ Page({
   },
   navTo(){
     wx.navigateTo({
-      url: '../songList'})
+      url: '../songList/songList'})
+  },
+  navtoplaying(){
+    wx.navigateTo({
+      url: '../playing/playing'})
   },
   onLoad: function() {
     if (!wx.cloud) {

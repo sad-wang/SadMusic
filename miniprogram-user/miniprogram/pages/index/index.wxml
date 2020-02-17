@@ -75,7 +75,7 @@
   </view>
 </view>
 <view class="playing">
-  <view class="song">
+  <view class="song" bindtap="navtoplaying">
     <view class="song-name">Lose It</view>
     <view class="song-singer">Flume · Vic Mensa</view>
   </view>
