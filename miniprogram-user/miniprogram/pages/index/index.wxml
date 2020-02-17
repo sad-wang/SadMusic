@@ -1,13 +1,5 @@
 <!--index.wxml-->
 <view class="container">
-
-<!-- 用户 openid -->
-<!--  <view class="userinfo">-->
-
-<!--    <view class="userinfo-nickname-wrapper">-->
-<!--      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>-->
-<!--    </view>-->
-<!--  </view>-->
   <view class="head">
     <view class="sadmusic">
       <view class="name">Sad Music</view>
@@ -21,7 +13,7 @@
             size="default"
     ></button>
   </view>
-  <view class="favorites" bindtap="navTo">
+  <view class="favorites" bindtap="navTo('../songList/songList')">
     <view class="favorites-item">
       <div class="heart">
         <div class="heart-solid icon"></div>
@@ -41,7 +33,7 @@
   <view class="recommend">
     <view class="recommend-title">Recommended</view>
     <scroll-view scroll-x enable-flex class="recommend-cards">
-        <view class="cards-item">
+        <view class="cards-item" bindtap="navTo('../songList/songList')">
           <item class="date">2/17 2020</item>
           <item class="content">
             <view class="label">摇滚 </view>
@@ -75,7 +67,7 @@
   </view>
 </view>
 <view class="playing">
-  <view class="song" bindtap="navtoplaying">
+  <view class="song" bindtap="navTo('../playing/playing')">
     <view class="song-name">Lose It</view>
     <view class="song-singer">Flume · Vic Mensa</view>
   </view>

@@ -2,28 +2,24 @@
 const app = getApp()
 Page({
   data: {
-    avatarUrl: './user-unlogin.png',
+    avatarUrl: '../../images/user-unlogin.png',
     userInfo: {},
     logged: false,
-    takeSession: false,
-    requestResult: ''
+    recommendLists:[],
   },
-  navTo(){
+  navTo(url){
     wx.navigateTo({
-      url: '../songList/songList'})
-  },
-  navtoplaying(){
-    wx.navigateTo({
-      url: '../playing/playing'})
+      url: url
+    })
   },
   onLoad: function() {
-    console.log(app.eventHub)
-    // 获取用户信息
+    this.getKnownUserInfo()
+    this.getRecommendLists()
+  },
+  getKnownUserInfo:function() {
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
-          console.log(2)
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
               this.setData({
@@ -36,6 +32,15 @@ Page({
       }
     })
   },
+  getRecommendLists:function(){
+    const db = wx.cloud.database()
+    db.collection('recommend').get().then(function(res) {
+      this.setData({
+        recommendLists: res.data
+      })
+    }.bind(this))
+  },
+
   onGetUserInfo: function(e) {
     if (!this.data.logged && e.detail.userInfo) {
       this.setData({
@@ -44,19 +49,5 @@ Page({
         userInfo: e.detail.userInfo
       })
     }
-  },
-  onGetOpenid: function() {
-    // 调用云函数
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-      }
-    })
   },
 })
