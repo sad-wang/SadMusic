@@ -1,4 +1,5 @@
 /**app.wxss**/
+@import "./libs/iconfont.wxss";
 page {
   background: linear-gradient(rgba(53,58,63,1) 0%, rgba(28,30,33,1) 100%) no-repeat;  
   display: flex;

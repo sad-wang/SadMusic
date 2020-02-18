@@ -1,15 +1,32 @@
-/* playing.wxss */
-view{  box-sizing: border-box;}
+view {box-sizing: border-box;}
+.icon-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #222529;
+    border: solid #242729;
+    border-top-color: #24272b;
+    border-left-color: #24272a;
+    box-shadow: -13rpx -13rpx 30rpx -16rpx rgba(255,255,255,0.1);
+}
+.button-play{
+    background: linear-gradient(#be280e 0%, #d5450b 100%);
+    border: solid #e04c0c;
+    border-right-color: #ca4110;
+    border-bottom-color: #c53e11;
+    border-left-color: #db4c0d;
+}
 .container {
+    height: 100vh;
+    padding: 0 65rpx;
+    background: linear-gradient(#343a3f 0%, #181a1d 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    background: linear-gradient(#343a3f 0%, #181a1d 100%);
-    padding: 0 65rpx;
-    height: 100vh;
 }
-.container .navTab{
+.container .navigation{
     height: 100rpx;
     display: flex;
     flex-direction: row;
@@ -26,30 +43,50 @@ view{  box-sizing: border-box;}
     justify-content: space-between;
     align-items: center;
 }
-.container .main .rolling{
+.container .main swiper{
+    width: 580rpx;
+    height: 580rpx;
+}
+.container .main swiper swiper-item .rolling{
     width: 580rpx;
     height: 580rpx;
     border-radius: 50%;
-    border: 15rpx solid;
-    border-left-color: #2a2d33;
-    border-right-color:#1d2124 ;
+    border: solid #1d2124;
     border-top-color: #25292e;
-    border-bottom-color: #1d2124;
+    border-left-color: #2a2d33;
+    background-image: url(https://7361-sad-music-1301301671.tcb.qcloud.la/covers/%E6%9C%B4%E6%A0%91-%E7%94%9F%E5%A6%82%E5%A4%8F%E8%8A%B1.jpg?sign=b49e1df28b4c94ae5e6d4e2bc67c0205&t=1582021933);
+    background-attachment: fixed;
+    background-size: contain;
+    background-position: center;
+}
+.container .main swiper swiper-item .lyrics {
+
 }
 .container .main .song{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
 }
 .container .main .song .song-name{
+    margin-bottom: 15rpx;
+    color: #aaabac;
     font-size: 26rpx;
     font-weight: bolder;
-    color: #aaabac;
 }
 .container .main .song .song-singer{
     color: #75787b;
     font-size: 24rpx;
+}
+.container .options{
+    display: flex;
+    flex-direction: row;
+    height: 150rpx;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.container .options .options-inner{
+    margin: 0 40rpx;
+    width: 80rpx;
+    height: 80rpx;
 }
 .container .actions{
     width: 100%;
@@ -59,159 +96,7 @@ view{  box-sizing: border-box;}
     justify-content: space-around;
     margin-bottom: 60rpx;
 }
-.container .actions .last{
-    border-radius: 50%;
+.container .actions .actions-inner{
     width: 120rpx;
     height: 120rpx;
-    border: 10rpx solid;
-    background-color: #222529;
-    border-left-color: #24272a;
-    border-right-color:#242729 ;
-    border-top-color: #24272b;
-    border-bottom-color: #242729;
-    box-shadow: -13rpx -13rpx 30rpx -16rpx rgba(255,255,255,0.1);
-}
-.container .actions .last::before{
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 12rpx 20.8rpx 12rpx 0;
-    border-color: transparent #818588 transparent transparent;
-    position: relative;
-    content: '';
-    display: block;
-    top: 41rpx;
-    left: 47rpx;
-}
-.container .actions .last::after {
-    position: relative;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 12rpx 20.8rpx 12rpx 0;
-    border-color: transparent #818588 transparent transparent;
-    content: '';
-    top: 19rpx;
-    left: 28rpx;
-    display: block;
-}
-.container .actions .play{
-    border-radius: 50%;
-    width: 126rpx;
-    height: 126rpx;
-    background: linear-gradient(#be280e 0%, #d5450b 100%);
-    border: 10rpx solid #df4c0c;
-    border-left-color: #db4c0d;
-    border-top-color: #e04c0c;
-    border-right-color:#ca4110;
-    border-bottom-color:#c53e11;
-    position: relative;
-    box-shadow: -13rpx -13rpx 49rpx -16rpx rgba(255,255,255,0.2);
-}
-/*.container .actions .play::after{
-  position: relative;
-  content: '';
-  display: block;
-  border-color: transparent transparent transparent #fdf0ec;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 12rpx 0 12rpx 20.8rpx;
-  left: 18.5rpx;
-  top: 14.5rpx;
-}*/
-.container .actions .play::before{
-    position: relative;
-    content: '';
-    display: block;
-    border-color: transparent transparent transparent #fdf0ec;
-    width: 0;
-    height: 30rpx;
-    border-style: double;
-    border-width: 0 0 0 30rpx;
-    left: 41rpx;
-    top: 40rpx;
-}
-.container .actions .next{
-    border-radius: 50%;
-    width: 120rpx;
-    height: 120rpx;
-    border: 10rpx solid;
-    background-color: #222529;
-    border-left-color: #24272a;
-    border-right-color:#242729 ;
-    border-top-color: #24272b;
-    border-bottom-color: #242729;
-    box-shadow: -13rpx -13rpx 30rpx -16rpx rgba(255,255,255,0.1);
-}
-.container .actions .next::before{
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 12rpx 0 12rpx 20.8rpx;
-    border-color: transparent transparent transparent #818588;
-    position: relative;
-    content: '';
-    display: block;
-    top: 41rpx;
-    left: 53rpx;
-}
-.container .actions .next::after {
-    position: relative;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 12rpx 0 12rpx 20.8rpx;
-    border-color: transparent transparent transparent #818588;
-    content: '';
-    top: 19rpx;
-    left: 35rpx;
-    display: block;
-}
-.container .option{
-    display: flex;
-    flex-direction: row;
-    height: 150rpx;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-.container .option .order{
-    margin: 0 40rpx;
-    border-radius: 50%;
-    width: 80rpx;
-    height: 80rpx;
-    border: 5rpx solid;
-    background-color: #222529;
-    border-left-color: #24272a;
-    border-right-color:#242729 ;
-    border-top-color: #24272b;
-    border-bottom-color: #242729;
-    box-shadow: -13rpx -13rpx 30rpx -16rpx rgba(255,255,255,0.1);
-}
-.container .option .like{
-    margin: 0 40rpx;
-    border-radius: 50%;
-    width: 80rpx;
-    height: 80rpx;
-    border: 5rpx solid;
-    background-color: #222529;
-    border-left-color: #24272a;
-    border-right-color:#242729 ;
-    border-top-color: #24272b;
-    border-bottom-color: #242729;
-    box-shadow: -13rpx -13rpx 30rpx -16rpx rgba(255,255,255,0.1);
-}
-.container .option .lists{
-    margin: 0 40rpx;
-    border-radius: 50%;
-    width: 80rpx;
-    height: 80rpx;
-    border: 5rpx solid;
-    background-color: #222529;
-    border-left-color: #24272a;
-    border-right-color:#242729 ;
-    border-top-color: #24272b;
-    border-bottom-color: #242729;
-    box-shadow: -13rpx -13rpx 30rpx -16rpx rgba(255,255,255,0.1);
 }
