@@ -1,3 +1,4 @@
+@import "../../app.wxss";
 .container {
     height: 90vh;
     display: flex;

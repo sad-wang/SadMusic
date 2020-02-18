@@ -1,9 +1,13 @@
 {
-  "usingComponents": {},
   "disableScroll": true,
   "navigationBarBackgroundColor": "#353a3f",
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "SadMusic",
   "backgroundColor": "#353a3f",
-  "backgroundTextStyle": "dark"
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+      "bottomBar": "/components/bottomBar/bottomBar",
+      "songLists": "/components/songLists/songLists",
+      "playing": "/components/playing/playing"
+  }
 }

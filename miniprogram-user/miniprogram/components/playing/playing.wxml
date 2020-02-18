@@ -1,4 +1,3 @@
-<!--playing.wxml-->
 <view class="container">
     <view class="navigation">
         <view class="tab-Item">歌曲</view>

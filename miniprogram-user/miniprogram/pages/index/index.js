@@ -3,30 +3,39 @@ const app = getApp()
 const db = wx.cloud.database()
 Page({
   data: {
+    indexShow:true,
+    songListsShow:false,
+    playingShow:false,
+    bottomBarShow:true,
+
     avatarUrl: '../../images/user-unlogin.png',
     userInfo: {},
     logged: false,
+
     recommendLists:[],
     favoritesLists:[],
+    songListsData:{},
   },
   toFavorites:function() {
-    wx.navigateTo({
-      url: '../songList/songList',
-      success: (res)=>{
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('songListData', {songData:this.data.favoritesLists,subtitle:this.data.userInfo.nickName,title:'Favorites'})
-      }
+    this.setData({
+      songListsData: {
+        songData:this.data.favoritesLists,
+        subtitle:this.data.userInfo.nickName,
+        title:'Favorites'},
+      indexShow:false,
+      songListsShow:true
     })
   },
   toRecommend:function(e){
     let index = e.currentTarget.dataset.index
-    console.log(this.data.recommendLists[index])
-    wx.navigateTo({
-      url: '../songList/songList',
-      success: (res)=>{
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('songListData', {songData:this.data.recommendLists[index].songs,subtitle:this.data.recommendLists[index].keywords,title:this.data.recommendLists[index].date})
-      }
+    this.setData({
+      songListsData: {
+        songData:this.data.recommendLists[index].songs,
+        subtitle:this.data.recommendLists[index].keywords,
+        title:this.data.recommendLists[index].date
+      },
+      indexShow:false,
+      songListsShow:true
     })
   },
   onLoad: function() {
