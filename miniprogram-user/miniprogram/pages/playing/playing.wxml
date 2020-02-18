@@ -13,15 +13,17 @@
             <view class="song-name">Low Life</view>
             <view class="song-singer">Future ft. The Weeknd</view>
         </view>
-        <progress></progress>
+        <progress border-radius="10rpx" style="width: 100%" percent="60" backgroundColor="#25292e" color="#d5450b" ></progress>
+    </view>
+    <view class="option">
+        <view class="order"></view>
+        <view class="lists"></view>
+        <view class="lists"></view>
     </view>
     <view class="actions">
         <view class="last"></view>
         <view class="play"></view>
         <view class="next"></view>
     </view>
-    <view class="option">
-        <view class="order"></view>
-        <view class="lists"></view>
-    </view>
+
 </view>

@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/playing/playing",
             "pages/index/index",
-            "pages/songList/songList",
-            "pages/playing/playing"
+            "pages/songList/songList"
+
 
        
   ],
