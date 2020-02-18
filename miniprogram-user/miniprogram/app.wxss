@@ -7,3 +7,22 @@ page {
   justify-content: flex-start;
   height: 100vh
 }
+.icon-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #222529;
+  border: 10rpx solid #242729;
+  border-right-color: #1d2124;
+  border-bottom-color: #23272b;
+  border-left-color: #2a2d33;
+  box-shadow: -13rpx -13rpx 30rpx -16rpx rgba(255,255,255,0.1);
+}
+.button-play{
+  background: linear-gradient(#be280e 0%, #d5450b 100%);
+  border: 10rpx solid #e04c0c;
+  border-right-color: #ca4110;
+  border-bottom-color: #c53e11;
+  border-left-color: #db4c0d;
+}

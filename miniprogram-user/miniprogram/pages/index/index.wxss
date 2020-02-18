@@ -1,33 +1,28 @@
-/**index.wxss**/
-view{  box-sizing: border-box;}
+view{box-sizing: border-box;}
 .container {
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   background: linear-gradient(rgba(53,58,63,1) 0%, rgba(28,30,33,1) 100%);
-  height: 90vh;
 }
 .container .head {
   height: 16.5vh;
   width: 100%;
-  box-shadow: 0rpx 4rpx #272b2f, 0rpx 4rpx #292d31, 0rpx 4rpx #2b3034, 0rpx 4rpx #2d3237, 0rpx 4rpx #2d3136, 0rpx 4rpx #2b2e32, 0rpx 4rpx #26292d, 0rpx 4rpx #23272b;
+  padding: 0 65rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 65rpx;
+  box-shadow: 0rpx 4rpx #272b2f, 0rpx 4rpx #292d31, 0rpx 4rpx #2b3034, 0rpx 4rpx #2d3237, 0rpx 4rpx #2d3136, 0rpx 4rpx #2b2e32, 0rpx 4rpx #26292d, 0rpx 4rpx #23272b;
 }
-.container .head .sadmusic{
-  display: flex;
-  flex-direction: column;
-}
-.container .head .sadmusic .name{
+.container .head .title .name{
   font-size: 40rpx;
   color: #dbdcdc;
   font-weight: bolder;
 }
-.container .head .sadmusic .slogan{
+.container .head .title .slogan{
   color: #7c7c80;
   font-weight: light;
   font-size: 22rpx;
@@ -35,102 +30,70 @@ view{  box-sizing: border-box;}
 .container .head .avatar {
   width: 95rpx;
   height: 95rpx;
+  padding: 0;
+  margin: 0;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
-  padding: 0;
-  margin: 0;
 }
 .container .favorites {
   height: 31vh;
   width: 100%;
-  box-shadow: 0rpx 4rpx #1c2023, 0rpx 4rpx #1d2225, 0rpx 4rpx #1f2328, 0rpx 4rpx #1e2329, 0rpx 4rpx #21262b, 0rpx 4rpx #23272a, 0rpx 4rpx #23272a, 0rpx 4rpx #23272a;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0rpx 4rpx #1c2023, 0rpx 4rpx #1d2225, 0rpx 4rpx #1f2328, 0rpx 4rpx #1e2329, 0rpx 4rpx #21262b, 0rpx 4rpx #23272a, 0rpx 4rpx #23272a, 0rpx 4rpx #23272a;
 }
-.container .favorites .favorites-item {
+.container .favorites .favorites-inner {
   width: 620rpx;
   height: 72%;
+  padding: 40rpx 50rpx;
   background-color: #262a2f;
-  border-radius: 47rpx;
-  border: #22252a 9.75rpx solid;
-  box-shadow: -13rpx -13rpx 49rpx -16rpx rgba(255,255,255,0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 25rpx 50rpx;
-  border-left-color: #2a2d33;
-  border-right-color:#1d2124 ;
-  border-top-color: #25292e;
+  border-radius: 47rpx;
+  box-shadow: -13rpx -13rpx 49rpx -16rpx rgba(255,255,255,0.1);
+  border: solid #25292e;
+  border-right-color: #1d2124;
   border-bottom-color: #23272b;
+  border-left-color: #2a2d33;
 }
-.container .favorites .favorites-item .heart{
-  box-shadow: -13rpx -13rpx 49rpx -16rpx rgba(255,255,255,0.2);
+.container .favorites .favorites-inner .heart{
   width: 86rpx;
   height: 86rpx;
-  border-radius: 50%;
-  border: 10rpx solid;
-  background-color: #2a2e33;
-  border-left-color: #24272a;
-  border-right-color:#242729 ;
-  border-top-color: #24272b;
-  border-bottom-color: #242729;
 }
-.container .favorites .favorites-item .content{
+.container .favorites .favorites-inner .content{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.container .favorites .favorites-item .content .content-left{
-  margin-left: 15rpx;
-  display: flex;
-  flex-direction: column;
-}
-.container .favorites .favorites-item .content .content-left .left-top{
+.container .favorites .favorites-inner .content .content-title{
   color: #cfd1d2;
   font-size: 24rpx;
   font-weight: bolder;
 }
-.container .favorites .favorites-item .content .content-left .left-bottom{
+.container .favorites .favorites-inner .content .content-subtitle{
   color: #808183;
   font-size: 22rpx;
-}
-.container .favorites .favorites-item .content .content-right{
-  display: flex;
-  flex-direction: column;
-  margin-right: 15rpx;
-}
-.container .favorites .favorites-item .content .content-right .right-top{
-  color: #cfd1d2;
-  font-size: 24rpx;
-  font-weight: bolder;
-  text-align: right;
-}
-.container .favorites .favorites-item .content .content-right .right-bottom{
-  color: #808183;
-  font-size: 22rpx;
-  text-align: right;
 }
 .container .recommend {
   height: 42.5vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
 }
 .container .recommend .recommend-title{
   height: 28%;
+  padding: 0 65rpx;
   display: flex;
   align-items: center;
   color: #dbdcdd;
   font-size: 28rpx;
   font-weight: bolder;
-  padding: 0 65rpx;
 }
 .container .recommend .recommend-cards{
   width: 100%;
-  white-space: nowrap;
   height: 60%;
+  white-space: nowrap;
   padding-left: 65rpx;
 }
 .container .recommend .recommend-cards .cards-item{
@@ -140,11 +103,10 @@ view{  box-sizing: border-box;}
   flex-direction: column;
   margin-right: 55rpx;
   border-radius: 24rpx;
-  border: 10rpx solid #26292d;
-  border-left-color: #292c33;
-  border-right-color:#191c20 ;
-  border-top-color: #25292f;
+  border: solid #25292f;
+  border-right-color: #191c20;
   border-bottom-color: #1a1d20;
+  border-left-color: #292c33;
   padding: 0 45rpx;
 }
 .container .recommend .recommend-cards .cards-item .date{
@@ -170,16 +132,16 @@ view{  box-sizing: border-box;}
   font-size: 22rpx;
 }
 .playing {
-  box-shadow: 0rpx -4rpx #272b2f, 0rpx -4rpx #23272b, 0rpx -4rpx #292d31, 0rpx -4rpx #272b2f, 0rpx -4rpx #23272b, 0rpx -4rpx #26292d, 0rpx -4rpx #2b2e32, 0rpx -4rpx #2d3136;
   height: 10vh;
   width: 100%;
-  background: linear-gradient(#181a1d 0%, #101214 100%);
   padding: 0 65rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
   position: fixed;
   bottom: 0vh;
+  background: linear-gradient(#181a1d 0%, #101214 100%);
+  box-shadow: 0rpx -4rpx #272b2f, 0rpx -4rpx #23272b, 0rpx -4rpx #292d31, 0rpx -4rpx #272b2f, 0rpx -4rpx #23272b, 0rpx -4rpx #26292d, 0rpx -4rpx #2b2e32, 0rpx -4rpx #2d3136;
 }
 .playing .song{
   display: flex;
@@ -200,121 +162,18 @@ view{  box-sizing: border-box;}
   flex-direction: row;
   align-items: center;
 }
-.playing .actions .last{
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 12rpx 20.8rpx 12rpx 0;
-  border-color: transparent #818588 transparent transparent;
-  position: relative;
+.playing .actions .actions-inner{
+  width: 60rpx;
+  height: 60rpx;
 }
-.playing .actions .last::after {
-  position: relative;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 12rpx 20.8rpx 12rpx 0;
-  border-color: transparent #818588 transparent transparent;
-  content: '';
-  left: -20rpx;
-  top:-11rpx;
-  display: block;
-}
-.playing .actions .play{
-  border-radius: 50%;
+.playing .actions .actions-play{
   width: 70rpx;
   height: 70rpx;
-  background: linear-gradient(#be280e 0%, #d5450b 100%);
-  border: 10rpx solid #df4c0c;
-  border-left-color: #db4c0d;
-  border-top-color: #e04c0c;
-  border-right-color:#ca4110;
-  border-bottom-color:#c53e11;
-  margin: 35rpx;
-  position: relative;
+  margin: 0 10px
 }
-/*.playing .actions .play::after{
-  position: relative;
-  content: '';
-  display: block;
-  border-color: transparent transparent transparent #fdf0ec;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 12rpx 0 12rpx 20.8rpx;
-  left: 18.5rpx;
-  top: 14.5rpx;
-}*/
-.playing .actions .play::before{
-  position: relative;
-  content: '';
-  display: block;
-  border-color: transparent transparent transparent #fdf0ec;
-  width: 0;
-  height: 24rpx;
-  border-style: double;
-  border-width: 0px 0px 0px 20rpx;
-  left: 18rpx;
-  top: 13rpx;
-}
-.playing .actions .next{
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 12rpx 0 12rpx 20.8rpx;
-  border-color: transparent transparent transparent #818588;
-  position: relative;
-}
-.playing .actions .next::after {
-  position: relative;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 12rpx 0 12rpx 20.8rpx;
-  border-color: transparent transparent transparent #818588;
-  content: '';
-  right: 0rpx;
-  top: -11rpx;
-  display: block;
-}
-.heart-solid.icon {
-  color: #e23c3c;
-  position: absolute;
-  margin-top: calc(43rpx - 4.5px);
-  margin-left: calc(43rpx - 4.5px);
-  width: 9px;
-  height: 9px;
-  border-left: solid 1px currentColor;
-  border-bottom: solid 1px currentColor;
-  background-color: currentColor;
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
-.heart-solid.icon:before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -1px;
-  width: 8px;
-  height: 5px;
-  border-radius: 5px 5px 0 0;
-  border-top: solid 1px currentColor;
-  border-left: solid 1px currentColor;
-  border-right: solid 1px currentColor;
-  background-color: currentColor;
-}
-.heart-solid.icon:after {
-  content: '';
-  position: absolute;
-  top: 0px;
-  left: 8px;
-  width: 5px;
-  height: 8px;
-  border-radius: 0 5px 5px 0;
-  border-top: solid 1px currentColor;
-  border-right: solid 1px currentColor;
-  border-bottom: solid 1px currentColor;
-  background-color: currentColor;
+.playing .actions .icon-wrapper .icon-style{
+  font-size: 16px;
+  font-weight: lighter;
 }
 .fuck {
   color: #ffffff00;

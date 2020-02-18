@@ -1,22 +1,4 @@
 view {box-sizing: border-box;}
-.icon-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: #222529;
-    border: solid #242729;
-    border-top-color: #24272b;
-    border-left-color: #24272a;
-    box-shadow: -13rpx -13rpx 30rpx -16rpx rgba(255,255,255,0.1);
-}
-.button-play{
-    background: linear-gradient(#be280e 0%, #d5450b 100%);
-    border: solid #e04c0c;
-    border-right-color: #ca4110;
-    border-bottom-color: #c53e11;
-    border-left-color: #db4c0d;
-}
 .container {
     height: 100vh;
     padding: 0 65rpx;

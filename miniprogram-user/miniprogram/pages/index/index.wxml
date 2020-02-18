@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="head">
-    <view class="sadmusic">
+    <view class="title">
       <view class="name">Sad Music</view>
       <view class="slogan">在这里，每天都会推荐好听的音乐🎵</view>
     </view>
@@ -14,18 +14,18 @@
     ></button>
   </view>
   <view class="favorites"  bindtap="toFavorites">
-    <view class="favorites-item">
-      <div class="heart">
-        <div class="heart-solid icon"></div>
-      </div>
+    <view class="favorites-inner">
+      <view class="icon-wrapper heart">
+        <view class="iconfont icon-heart icon-style" style="color: #e23c3c"></view>
+      </view>
       <view class="content">
-        <view class="content-left">
-          <view class="left-top">Favorites</view>
-          <view class="left-bottom">{{userInfo.nickName}}</view>
+        <view>
+          <view class="content-title">Favorites</view>
+          <view class="content-subtitle">{{userInfo.nickName}}</view>
         </view>
-        <view class="content-right">
-          <view class="right-top">{{favoritesLists.length}}</view>
-          <view class="right-bottom">Songs</view>
+        <view>
+          <view class="content-title">{{favoritesLists.length}}</view>
+          <view class="content-subtitle">Songs</view>
         </view>
       </view>
     </view>
@@ -50,8 +50,14 @@
     <view class="song-singer">Flume · Vic Mensa</view>
   </view>
   <view class="actions">
-    <view class="last"></view>
-    <view class="play"></view>
-    <view class="next"></view>
+    <view class="icon-wrapper actions-inner">
+      <view class="iconfont icon-previous icon-style"></view>
+    </view>
+    <view class="icon-wrapper actions-play button-play">
+      <view class="iconfont icon-pause icon-style" style="color: #fdf0ec"></view>
+    </view>
+    <view class="icon-wrapper actions-inner">
+      <view class="iconfont icon-next icon-style"></view>
+    </view>
   </view>
 </view>

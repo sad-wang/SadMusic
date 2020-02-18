@@ -16,7 +16,6 @@
     font-size:20px;
     font-weight: bold;
 }
-
 .icon-heart:before {
     content: "\e608";
 }
