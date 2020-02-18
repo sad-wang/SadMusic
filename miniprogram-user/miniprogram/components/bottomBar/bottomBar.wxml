@@ -1,8 +1,8 @@
 
 <view class="playing">
   <view class="song" >
-    <view class="song-name">Lose It</view>
-    <view class="song-singer">Flume · Vic Mensa</view>
+    <view class="song-name">{{songLists[index].song_name}}</view>
+    <view class="song-singer">{{songLists[index].singer}}</view>
   </view>
   <view class="actions">
     <view class="icon-wrapper actions-inner">

@@ -43,6 +43,6 @@
     </scroll-view>
   </view>
 </view>
-<bottomBar wx:if="{{bottomBarShow}}" />
-<songLists wx:if="{{songListsShow}}" songListsData="{{songListsData}}" />
+<bottomBar wx:if="{{bottomBarShow}}" detail="{{detail}}"/>
+<songLists wx:if="{{songListsShow}}" bind:playing="updatePlaying" songListsData="{{songListsData}}" />
 <playing wx:if="{{playingShow}}" />

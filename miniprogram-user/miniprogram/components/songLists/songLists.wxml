@@ -15,7 +15,7 @@
                 <view class="song-name">{{item.song_name}}</view>
                 <view class="singer">{{item.singer}}</view>
             </view>
-            <view class="icon-wrapper item-play">
+            <view class="icon-wrapper item-play" data-index="{{index}}" bindtap="playingSongs">
                 <view class="iconfont icon-play icon-style"></view>
             </view>
         </view>

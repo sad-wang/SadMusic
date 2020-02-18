@@ -15,6 +15,8 @@ Page({
     recommendLists:[],
     favoritesLists:[],
     songListsData:{},
+
+    detail:{}
   },
   toFavorites:function() {
     this.setData({
@@ -23,7 +25,7 @@ Page({
         subtitle:this.data.userInfo.nickName,
         title:'Favorites'},
       indexShow:false,
-      songListsShow:true
+      songListsShow:true,
     })
   },
   toRecommend:function(e){
@@ -100,4 +102,9 @@ Page({
       })
     }
   },
+  updatePlaying:function (e) {
+    this.setData({
+      detail: e.detail
+    })
+  }
 })
