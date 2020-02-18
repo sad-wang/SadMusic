@@ -1,4 +1,3 @@
-view{box-sizing: border-box;}
 .container {
   height: 90vh;
   display: flex;
@@ -130,50 +129,6 @@ view{box-sizing: border-box;}
 .container .recommend .recommend-cards .cards-item .content .count{
   color: #808183;
   font-size: 22rpx;
-}
-.playing {
-  height: 10vh;
-  width: 100%;
-  padding: 0 65rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: fixed;
-  bottom: 0vh;
-  background: linear-gradient(#181a1d 0%, #101214 100%);
-  box-shadow: 0rpx -4rpx #272b2f, 0rpx -4rpx #23272b, 0rpx -4rpx #292d31, 0rpx -4rpx #272b2f, 0rpx -4rpx #23272b, 0rpx -4rpx #26292d, 0rpx -4rpx #2b2e32, 0rpx -4rpx #2d3136;
-}
-.playing .song{
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.playing .song .song-name{
-  color: #949597;
-  font-weight: bolder;
-  font-size: 24rpx;
-}
-.playing .song .song-singer{
-  color: #484c4f;
-  font-size: 22rpx;
-}
-.playing .actions{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.playing .actions .actions-inner{
-  width: 60rpx;
-  height: 60rpx;
-}
-.playing .actions .actions-play{
-  width: 70rpx;
-  height: 70rpx;
-  margin: 0 10px
-}
-.playing .actions .icon-wrapper .icon-style{
-  font-size: 16px;
-  font-weight: lighter;
 }
 .fuck {
   color: #ffffff00;

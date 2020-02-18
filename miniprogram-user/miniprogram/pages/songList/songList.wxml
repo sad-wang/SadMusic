@@ -1,14 +1,12 @@
-<!--songList.wxml-->
-<!--songList.wxml-->
 <view class="container">
     <view class="head">
         <view class="title">
             <view class="name">{{title}}</view>
             <view class="info">{{subtitle}}</view>
         </view>
-        <div class="heart">
-            <div class="heart-solid icon"></div>
-        </div>
+        <view class="icon-wrapper heart">
+            <view class="iconfont icon-heart" style="color: #e23c3c"></view>
+        </view>
     </view>
     <scroll-view enable-flex scroll-y class="lists">
         <view class="lists-item" wx:for="{{songLists}}" wx:key="key" wx:for-item="item">
@@ -17,18 +15,26 @@
                 <view class="song-name">{{item.song_name}}</view>
                 <view class="singer">{{item.singer}}</view>
             </view>
-            <view class="item-play"></view>
+            <view class="icon-wrapper item-play">
+                <view class="iconfont icon-play icon-style"></view>
+            </view>
         </view>
     </scroll-view>
 </view>
 <view class="playing">
-    <view class="song">
+    <view class="song" >
         <view class="song-name">Lose It</view>
         <view class="song-singer">Flume · Vic Mensa</view>
     </view>
     <view class="actions">
-        <view class="last"></view>
-        <view class="play"></view>
-        <view class="next"></view>
+        <view class="icon-wrapper actions-inner">
+            <view class="iconfont icon-previous icon-style"></view>
+        </view>
+        <view class="icon-wrapper actions-play button-play">
+            <view class="iconfont icon-pause icon-style" style="color: #fdf0ec"></view>
+        </view>
+        <view class="icon-wrapper actions-inner">
+            <view class="iconfont icon-next icon-style"></view>
+        </view>
     </view>
 </view>
