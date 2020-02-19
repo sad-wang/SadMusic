@@ -1,5 +1,5 @@
 
-<view class="playing">
+<view class="playing" wx:if="{{!(songLists[0]==undefined)}}">
   <view class="song" >
     <view class="song-name">{{songLists[index].song_name}}</view>
     <view class="song-singer">{{songLists[index].singer}}</view>
@@ -9,7 +9,7 @@
       <view class="iconfont icon-previous icon-style"></view>
     </view>
     <view class="icon-wrapper actions-play button-play" bindtap="pause">
-      <view class="iconfont icon-pause icon-style" style="color: #fdf0ec"></view>
+      <view class="iconfont icon-{{state?'pause':'play'}} icon-style" style="color: #fdf0ec"></view>
     </view>
     <view class="icon-wrapper actions-inner" bindtap="next">
       <view class="iconfont icon-next icon-style"></view>

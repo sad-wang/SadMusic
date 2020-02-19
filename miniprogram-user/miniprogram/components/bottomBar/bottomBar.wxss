@@ -40,6 +40,6 @@
   margin: 0 10px
 }
 .playing .actions .icon-wrapper .icon-style{
-  font-size: 16px;
+  font-size: 14px;
   font-weight: lighter;
 }

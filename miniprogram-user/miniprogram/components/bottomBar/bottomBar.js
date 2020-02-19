@@ -1,5 +1,5 @@
 // components/bottomBar.js
-let audio = wx.createInnerAudioContext()
+const audio = wx.getBackgroundAudioManager()
 Component({
   properties: {
     detail:{
@@ -13,7 +13,18 @@ Component({
     state:null
   },
   lifetimes: {
-    attached: function () {},
+    attached: function () {
+      audio.onEnded(()=>{
+            this.setData({
+              index:(this.data.index+1)%this.data.songLists.length,
+              state:1
+            })
+            wx.cloud.getTempFileURL({fileList:[{fileID:this.data.songLists[this.data.index].url}]}).then((res)=>{
+              audio.src = encodeURI(res.fileList[0].tempFileURL)
+            })
+      }
+      )
+    },
   },
   pageLifetimes: {
     show: function () { },
@@ -36,22 +47,22 @@ Component({
       }
     },
     previous(){
-      audio.destroy()
-      audio = wx.createInnerAudioContext()
       this.setData({
-        index:((this.data.index-1)+this.data.songLists.length)%this.data.songLists.length
+        index:((this.data.index-1)+this.data.songLists.length)%this.data.songLists.length,
+        state:1
       })
-      audio.src=this.data.songLists[this.data.index].url
-      audio.play()
+      wx.cloud.getTempFileURL({fileList:[{fileID:this.data.songLists[this.data.index].url}]}).then((res)=>{
+        audio.src = encodeURI(res.fileList[0].tempFileURL)
+      })
     },
     next(){
-      audio.destroy()
-      audio = wx.createInnerAudioContext()
       this.setData({
-        index:(this.data.index+1)%this.data.songLists.length
+        index:(this.data.index+1)%this.data.songLists.length,
+        state:1
       })
-      audio.src=this.data.songLists[this.data.index].url
-      audio.play()
+      wx.cloud.getTempFileURL({fileList:[{fileID:this.data.songLists[this.data.index].url}]}).then((res)=>{
+        audio.src = encodeURI(res.fileList[0].tempFileURL)
+      })
     }
   },
   observers: {
@@ -60,10 +71,15 @@ Component({
         ...this.data.detail,
         state:1
       })
-      audio.destroy()
-      audio = wx.createInnerAudioContext()
-      audio.src = this.data.songLists[this.data.index]?this.data.songLists[this.data.index].url:null
-      audio.play()
+      let url = this.data.songLists[this.data.index] ? this.data.songLists[this.data.index].url : null
+      wx.cloud.getTempFileURL({fileList:[{fileID:url}]}).then((res)=>{
+        audio.title = '此时此刻'
+        audio.epname = '此时此刻'
+        audio.singer = '许巍'
+        audio.coverImgUrl = ''
+        audio.src = encodeURI(res.fileList[0].tempFileURL)
+      })
+
     }
   }
 })
