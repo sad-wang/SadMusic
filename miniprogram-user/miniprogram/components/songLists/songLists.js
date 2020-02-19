@@ -38,6 +38,9 @@ Component({
         songLists:JSON.parse(JSON.stringify(this.data.songLists))
       }
       this.triggerEvent('playing', detail, {capturePhase:true,bubbles: true, composed: true})
+    },
+    backToIndex:function () {
+      this.triggerEvent('backToIndex', {}, {capturePhase:true,bubbles: true, composed: true})
     }
   }
 })

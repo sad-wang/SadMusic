@@ -1,5 +1,6 @@
 <view class="container">
     <view class="head">
+        <view class="iconfont icon-back" style="margin-right: 30rpx" bindtap="backToIndex"></view>
         <view class="title">
             <view class="name">{{title}}</view>
             <view class="info">{{subtitle}}</view>

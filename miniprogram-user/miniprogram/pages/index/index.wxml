@@ -22,7 +22,7 @@
           <view class="content-title">Favorites</view>
           <view class="content-subtitle">{{userInfo.nickName}}</view>
         </view>
-        <view>
+        <view style="text-align: right">
           <view class="content-title">{{favoritesLists.length}}</view>
           <view class="content-subtitle">Songs</view>
         </view>
@@ -44,5 +44,5 @@
   </view>
 </view>
 <bottomBar wx:if="{{bottomBarShow}}" detail="{{detail}}"/>
-<songLists wx:if="{{songListsShow}}" bind:playing="updatePlaying" songListsData="{{songListsData}}" />
+<songLists wx:if="{{songListsShow}}" bind:playing="updatePlaying" bind:backToIndex="backToIndex" songListsData="{{songListsData}}" />
 <playing wx:if="{{playingShow}}" />

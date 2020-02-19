@@ -71,7 +71,7 @@ Component({
         ...this.data.detail,
         state:1
       })
-      let url = this.data.songLists[this.data.index] ? this.data.songLists[this.data.index].url : null
+      let url = this.data.songLists[this.data.index].url
       wx.cloud.getTempFileURL({fileList:[{fileID:url}]}).then((res)=>{
         audio.title = '此时此刻'
         audio.epname = '此时此刻'

@@ -106,5 +106,11 @@ Page({
     this.setData({
       detail: e.detail
     })
+  },
+  backToIndex:function () {
+    this.setData({
+      indexShow:true,
+      songListsShow:false,
+    })
   }
 })
