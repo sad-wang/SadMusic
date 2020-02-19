@@ -30,17 +30,18 @@ Component({
           this.setData({
             songsData: songsData
           })
-          console.log(this.data.songsData)
         })
       })
     },
     playingSongs:function(e){
       let detail={
         index:e.currentTarget.dataset.index,
-        songLists:this.data.songLists,
+        songsData:this.data.songsData,
       }
       this.triggerEvent('updateListsAndPlayingIt', detail, {capturePhase:true,bubbles: true, composed: true})
     },
-
+    backToIndex(){
+      this.triggerEvent('backToIndex', {}, {capturePhase:true,bubbles: true, composed: true})
+    }
   }
 })

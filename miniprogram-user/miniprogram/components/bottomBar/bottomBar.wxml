@@ -1,15 +1,15 @@
 
 <view class="playing" >
   <view class="song" bindtap="toPlaying">
-    <view class="song-name">{{songLists[index].song_name}}</view>
-    <view class="song-singer">{{songLists[index].singer}}</view>
+    <view class="song-name">{{playingData.songsData[playingData.index].song_name}}</view>
+    <view class="song-singer">{{playingData.songsData[playingData.index].singer}}</view>
   </view>
   <view class="actions">
     <view class="icon-wrapper actions-inner" bindtap="previous">
       <view class="iconfont icon-previous icon-style"></view>
     </view>
     <view class="icon-wrapper actions-play button-play" bindtap="pause">
-      <view class="iconfont icon-{{state?'pause':'play'}} icon-style" style="color: #fdf0ec"></view>
+      <view class="iconfont icon-{{playingData.playingState?'pause':'play'}} icon-style" style="color: #fdf0ec"></view>
     </view>
     <view class="icon-wrapper actions-inner" bindtap="next">
       <view class="iconfont icon-next icon-style"></view>

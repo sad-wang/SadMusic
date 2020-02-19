@@ -2,14 +2,14 @@
     <view class="navigation">
         <view class="iconfont icon-back" style="position:absolute;left: 65rpx;" bindtap="backToIndex"></view>
         <view class="song">
-            <view class="song-name">{{songLists[index].song_name}}</view>
-            <view class="song-singer">{{songLists[index].singer}}</view>
+            <view class="song-name">{{playingData.songsData[playingData.index].song_name}}</view>
+            <view class="song-singer">{{playingData.songsData[playingData.index].singer}}</view>
         </view>
     </view>
     <view class="main">
         <swiper>
             <swiper-item>
-                <view class="rolling" style="background-image: url({{albumUrl}})">
+                <view class="rolling" style="background-image: url({{playingData.albumUrl}})">
                 </view>
             </swiper-item>
             <swiper-item>
@@ -35,7 +35,7 @@
             <view class="iconfont icon-previous"></view>
         </view>
         <view class="icon-wrapper actions-inner button-play" bindtap="pause">
-            <view class="iconfont icon-{{state?'pause':'play'}}" style="color: #fdf0ec"></view>
+            <view class="iconfont icon-{{playingData.playingState?'pause':'play'}}" style="color: #fdf0ec"></view>
         </view>
         <view class="icon-wrapper actions-inner" bindtap="next">
             <view class="iconfont icon-next"></view>

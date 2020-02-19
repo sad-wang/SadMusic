@@ -1,6 +1,7 @@
 //index.js
 const app = getApp()
 const db = wx.cloud.database()
+const audio = wx.getBackgroundAudioManager()
 Page({
   data: {
     index:true,
@@ -23,10 +24,12 @@ Page({
     },
 
     playingData: {
-      songLists: [],
+      songsData: [],
       playingState: false,
       cycleWay: '',
-      index: 0
+      index: 0,
+      albumUrl:'',
+      songUrl:''
     }
   },
   onLoad: function() {
@@ -114,14 +117,106 @@ Page({
   updateListsAndPlayingIt:function (e) {
     this.setData({
       playingData: {
-        songLists: e.detail.songLists,
+        songsData: e.detail.songsData,
         playingState: this.data.playingData.playingState,
         cycleWay: this.data.playingData.cycleWay,
         index: e.detail.index,
+        albumUrl:this.data.playingData.albumUrl,
+        songUrl:this.data.playingData.songUrl,
       }
     })
+    this.playing()
+  },
+  backToIndex(){
+    this.setData({
+      bottomBar:true,
+      songLists:false,
+      playing:false,
+      index:true,
+    })
+  },
+  playing(){
+    let song = this.data.playingData.songsData[this.data.playingData.index]
+    audio.title = song.song_name
+    audio.epname = song.album.name
+    audio.singer = song.singer
+    wx.cloud.getTempFileURL({fileList:[{fileID: song.url},{fileID: song.album.url}]}).then((res)=>{
+      this.setData({
+        playingData: {
+          songsData:this.data.playingData.songsData,
+          playingState: true,
+          cycleWay: this.data.playingData.cycleWay,
+          index: this.data.playingData.index,
+          albumUrl: res.fileList[1].tempFileURL,
+          songUrl: res.fileList[0].tempFileURL,
+        }
+      })
+      audio.coverImgUrl = res.fileList[1].tempFileURL
+      audio.src = res.fileList[0].tempFileURL
+    })
+  },
+  pause(){
+    audio.pause()
+    this.setData({
+      playingData: {
+        songsData:this.data.playingData.songsData,
+        playingState: false,
+        cycleWay: this.data.playingData.cycleWay,
+        index: this.data.playingData.index,
+        albumUrl:this.data.playingData.albumUrl,
+        songUrl:this.data.playingData.songUrl,
+      }
+    })
+  },
+  next(){
+    this.setData({
+      playingData: {
+        songsData:this.data.playingData.songsData,
+        playingState: this.data.playingData.playingState,
+        cycleWay: this.data.playingData.cycleWay,
+        index: (this.data.playingData.index+1)%this.data.playingData.songsData.length,
+        albumUrl:this.data.playingData.albumUrl,
+        songUrl:this.data.playingData.songUrl,
+      }
+    })
+    this.playing()
+  },
+  previous(){
+    this.setData({
+      playingData: {
+        songsData:this.data.playingData.songsData,
+        playingState: this.data.playingData.playingState,
+        cycleWay: this.data.playingData.cycleWay,
+        index: (this.data.playingData.index - 1 + this.data.playingData.songsData.length) % this.data.playingData.songsData.length,
+        albumUrl:this.data.playingData.albumUrl,
+        songUrl:this.data.playingData.songUrl,
+      }
+    })
+    this.playing()
+  },
+  PlayOrPause(){
+    if (this.data.playingData.playingState){
+      this.pause()
+    }else {
+      audio.play()
+      this.setData({
+        playingData: {
+          songsData:this.data.playingData.songsData,
+          playingState: true,
+          cycleWay: this.data.playingData.cycleWay,
+          index: this.data.playingData.index,
+          albumUrl:this.data.playingData.albumUrl,
+          songUrl:this.data.playingData.songUrl,
+        }
+      })
+    }
+  },
+  toPlaying(){
+    this.setData({
+      bottomBar:false,
+      songLists:false,
+      playing:true,
+      index:false,
+    })
   }
-
-
-
 })
