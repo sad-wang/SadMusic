@@ -7,41 +7,40 @@ Component({
     }
   },
   data: {
-    title:'',
-    subtitle:'',
-    songData:[],
-    songLists:[]
+    title: '',
+    subtitle: '',
+    songLists: [],
+    info: '',
+
+    songsData: []
   },
   attached: function() {
+    console.log(1)
     this.setData({
-      title:this.data.songListsData.title,
-      subtitle:this.data.songListsData.subtitle,
-      songData:this.data.songListsData.songData
+      ...this.data.songListsData
     })
-    this.getSongLists()
+    this.initSongsData()
   },
   methods:{
-    getSongLists:function(){
-      this.data.songData.map((songs)=>{
-        db.collection('song_list').where({_id:songs}).get().then((res)=>{
-          let songData = JSON.parse(JSON.stringify(this.data.songLists))
-          songData.push(res.data[0])
+    initSongsData:function(){
+      this.data.songLists.map((song)=>{
+        db.collection('song_list').where({_id:song}).get().then((res)=>{
+          let songsData = this.data.songsData
+          songsData.push(res.data[0])
           this.setData({
-            songLists: songData
+            songsData: songsData
           })
+          console.log(this.data.songsData)
         })
       })
     },
     playingSongs:function(e){
-      let songLists = JSON.parse(JSON.stringify(this.data.songLists))
       let detail={
         index:e.currentTarget.dataset.index,
-        songLists:songLists,
+        songLists:this.data.songLists,
       }
-      this.triggerEvent('playing', detail, {capturePhase:true,bubbles: true, composed: true})
+      this.triggerEvent('updateListsAndPlayingIt', detail, {capturePhase:true,bubbles: true, composed: true})
     },
-    backToIndex:function () {
-      this.triggerEvent('backToIndex', {}, {capturePhase:true,bubbles: true, composed: true})
-    }
+
   }
 })

@@ -1,4 +1,5 @@
-<view wx:if="{{componentShow.index}}" class="container">
+<view bind:updateListsAndPlayingIt="updateListsAndPlayingIt">
+  <view wx:if="{{index}}" class="container" >
   <view class="head">
     <view class="title">
       <view class="name">Sad Music</view>
@@ -43,6 +44,7 @@
     </scroll-view>
   </view>
 </view>
-<bottomBar wx:if="{{componentShow.bottomBar}}" />
-<songLists wx:if="{{componentShow.songLists}}" />
-<playing wx:if="{{componentShow.playing}}" />
+  <bottomBar wx:if="{{bottomBar}}" />
+  <songLists wx:if="{{songLists}}" songListsData="{{songListsData}}"/>
+  <playing wx:if="{{playing}}" />
+</view>

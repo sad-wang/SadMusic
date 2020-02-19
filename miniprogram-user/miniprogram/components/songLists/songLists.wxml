@@ -10,7 +10,7 @@
         </view>
     </view>
     <scroll-view enable-flex scroll-y class="lists">
-        <view class="lists-item" wx:for="{{songLists}}" wx:key="key" wx:for-item="item">
+        <view class="lists-item" wx:for="{{songsData}}" wx:key="key" wx:for-item="item">
             <view class="item-id">{{index+1}}</view>
             <view class="item-content">
                 <view class="song-name">{{item.song_name}}</view>

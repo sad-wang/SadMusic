@@ -3,12 +3,10 @@ const app = getApp()
 const db = wx.cloud.database()
 Page({
   data: {
-    componentShow:{
-      index:true,
-      bottomBar:true,
-      songLists:false,
-      playing:false
-    },
+    index:true,
+    bottomBar:true,
+    songLists:false,
+    playing:false,
 
     avatarUrl:'../../images/user-unlogin.png',
     userInfo:{},
@@ -16,6 +14,13 @@ Page({
 
     recommendLists:[],
     favoritesLists: [],
+
+    songListsData:{
+      title:'',
+      subtitle:'',
+      songLists:[],
+      info:'',
+    },
 
     playingData: {
       songLists: [],
@@ -77,38 +82,45 @@ Page({
   },
   showSongLists:function(){
     this.setData({
-      componentShow:{
-        index:false,
         bottomBar:true,
-        songsLists:true,
-        playing:false
-      },
+        songLists:true,
+        playing:false,
+        index:false,
     })
   },
   toFavorites:function() {
-    this.showSongLists()
     this.setData({
-      playingData: {
-        songLists: this.data.favoritesLists,
-        playingState: this.data.playingData.playingState,
-        cycleWay: this.data.playingData.cycleWay,
-        index: this.data.playingData.index,
+      songListsData:{
+        title:'Favorites',
+        subtitle:this.data.userInfo.nickName,
+        songLists:this.data.favoritesLists,
+        info:'favorites',
       },
     })
-    console.log(this.data.playingData.songLists)
+    this.showSongLists()
   },
   toRecommend:function(e){
-    this.showSongLists()
+    let index = e.currentTarget.dataset.index
     this.setData({
-      playingData: {
-        songLists: this.data.recommendLists,
-        playingState: this.data.playingData.playingState,
-        cycleWay: this.data.playingData.cycleWay,
-        index: this.data.playingData.index,
+      songListsData:{
+        title:this.data.recommendLists[index].date,
+        subtitle:this.data.recommendLists[index].keywords,
+        songLists:this.data.recommendLists[index].songs,
+        info:'recommend',
       },
     })
+    this.showSongLists()
   },
-
+  updateListsAndPlayingIt:function (e) {
+    this.setData({
+      playingData: {
+        songLists: e.detail.songLists,
+        playingState: this.data.playingData.playingState,
+        cycleWay: this.data.playingData.cycleWay,
+        index: e.detail.index,
+      }
+    })
+  }
 
 
 
