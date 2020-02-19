@@ -1,4 +1,4 @@
-<view wx:if="{{indexShow}}" class="container">
+<view wx:if="{{componentShow.index}}" class="container">
   <view class="head">
     <view class="title">
       <view class="name">Sad Music</view>
@@ -19,18 +19,18 @@
       </view>
       <view class="content">
         <view>
-          <view class="content-title">Favorites</view>
+          <view class="content-title">我喜欢的音乐</view>
           <view class="content-subtitle">{{userInfo.nickName}}</view>
         </view>
         <view style="text-align: right">
           <view class="content-title">{{favoritesLists.length}}</view>
-          <view class="content-subtitle">Songs</view>
+          <view class="content-subtitle">首</view>
         </view>
       </view>
     </view>
   </view>
   <view class="recommend">
-    <view class="recommend-title">Recommended</view>
+    <view class="recommend-title">每日推荐</view>
     <scroll-view scroll-x enable-flex class="recommend-cards">
         <view class="cards-item" data-index="{{index}}" wx:for="{{recommendLists}}" wx:key="key" wx:for-item="item" bindtap="toRecommend">
           <item class="date">{{item.date}}</item>
@@ -43,6 +43,6 @@
     </scroll-view>
   </view>
 </view>
-<bottomBar wx:if="{{bottomBarShow}}" detail="{{detail}}"/>
-<songLists wx:if="{{songListsShow}}" bind:playing="updatePlaying" bind:backToIndex="backToIndex" songListsData="{{songListsData}}" />
-<playing wx:if="{{playingShow}}" />
+<bottomBar wx:if="{{componentShow.bottomBar}}" />
+<songLists wx:if="{{componentShow.songLists}}" />
+<playing wx:if="{{componentShow.playing}}" />

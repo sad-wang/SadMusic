@@ -1,15 +1,15 @@
 <view class="container">
     <view class="navigation">
-        <view class="tab-Item">歌曲</view>
-        <text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text>
-        |
-        <text decode="{{true}}" space="{{true}}">&nbsp;&nbsp;</text>
-        <view class="tab-Item">歌词</view>
+        <view class="iconfont icon-back" style="position:absolute;left: 65rpx;" bindtap="backToIndex"></view>
+        <view class="song">
+            <view class="song-name">{{songLists[index].song_name}}</view>
+            <view class="song-singer">{{songLists[index].singer}}</view>
+        </view>
     </view>
     <view class="main">
         <swiper>
             <swiper-item>
-                <view class="rolling">
+                <view class="rolling" style="background-image: url({{albumUrl}})">
                 </view>
             </swiper-item>
             <swiper-item>
@@ -17,10 +17,6 @@
                 </view>
             </swiper-item>
         </swiper>
-        <view class="song">
-            <view class="song-name">Low Life</view>
-            <view class="song-singer">Future ft. The Weeknd</view>
-        </view>
         <progress border-radius="15px" style="width: 100%" stroke-width="4" percent="60" backgroundColor="#25292e" color="#d5450b" ></progress>
     </view>
     <view class="options">
@@ -35,13 +31,13 @@
         </view>
     </view>
     <view class="actions">
-        <view class="icon-wrapper actions-inner">
+        <view class="icon-wrapper actions-inner" bindtap="previous">
             <view class="iconfont icon-previous"></view>
         </view>
-        <view class="icon-wrapper actions-inner button-play">
-            <view class="iconfont icon-pause" style="color: #fdf0ec"></view>
+        <view class="icon-wrapper actions-inner button-play" bindtap="pause">
+            <view class="iconfont icon-{{state?'pause':'play'}}" style="color: #fdf0ec"></view>
         </view>
-        <view class="icon-wrapper actions-inner">
+        <view class="icon-wrapper actions-inner" bindtap="next">
             <view class="iconfont icon-next"></view>
         </view>
     </view>

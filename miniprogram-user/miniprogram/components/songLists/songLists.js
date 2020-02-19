@@ -33,9 +33,10 @@ Component({
       })
     },
     playingSongs:function(e){
+      let songLists = JSON.parse(JSON.stringify(this.data.songLists))
       let detail={
         index:e.currentTarget.dataset.index,
-        songLists:JSON.parse(JSON.stringify(this.data.songLists))
+        songLists:songLists,
       }
       this.triggerEvent('playing', detail, {capturePhase:true,bubbles: true, composed: true})
     },

@@ -1,6 +1,6 @@
 
-<view class="playing" wx:if="{{!(songLists[0]==undefined)}}">
-  <view class="song" >
+<view class="playing" >
+  <view class="song" bindtap="toPlaying">
     <view class="song-name">{{songLists[index].song_name}}</view>
     <view class="song-singer">{{songLists[index].singer}}</view>
   </view>

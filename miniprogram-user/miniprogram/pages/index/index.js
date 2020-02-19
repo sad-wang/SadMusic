@@ -3,42 +3,26 @@ const app = getApp()
 const db = wx.cloud.database()
 Page({
   data: {
-    indexShow:true,
-    songListsShow:false,
-    playingShow:false,
-    bottomBarShow:true,
+    componentShow:{
+      index:true,
+      bottomBar:true,
+      songLists:false,
+      playing:false
+    },
 
-    avatarUrl: '../../images/user-unlogin.png',
-    userInfo: {},
-    logged: false,
+    avatarUrl:'../../images/user-unlogin.png',
+    userInfo:{},
+    logged:false,
 
     recommendLists:[],
-    favoritesLists:[],
-    songListsData:{},
+    favoritesLists: [],
 
-    detail:{}
-  },
-  toFavorites:function() {
-    this.setData({
-      songListsData: {
-        songData:this.data.favoritesLists,
-        subtitle:this.data.userInfo.nickName,
-        title:'Favorites'},
-      indexShow:false,
-      songListsShow:true,
-    })
-  },
-  toRecommend:function(e){
-    let index = e.currentTarget.dataset.index
-    this.setData({
-      songListsData: {
-        songData:this.data.recommendLists[index].songs,
-        subtitle:this.data.recommendLists[index].keywords,
-        title:this.data.recommendLists[index].date
-      },
-      indexShow:false,
-      songListsShow:true
-    })
+    playingData: {
+      songLists: [],
+      playingState: false,
+      cycleWay: '',
+      index: 0
+    }
   },
   onLoad: function() {
     this.getKnownUserInfo()
@@ -61,8 +45,23 @@ Page({
       }
     })
   },
+  onGetUserInfo: function(e) {
+    if (!this.data.logged && e.detail.userInfo) {
+      this.setData({
+        logged: true,
+        avatarUrl: e.detail.userInfo.avatarUrl,
+        userInfo: e.detail.userInfo
+      })
+    }
+  },
+  getUserFavoritesLists:function(){
+    db.collection('user').where({_openid: app.globalData.openid}).get().then((res)=>{
+      this.setData({
+        favoritesLists: res.data[0].favorites
+      })
+    })
+  },
   getRecommendLists:function(){
-    const db = wx.cloud.database()
     db.collection('recommend').get().then((res)=>{
       let result = res.data
       result.map((item)=>{
@@ -76,41 +75,41 @@ Page({
       })
     })
   },
-  // aa:function(){
-  //   db.collection('user').add({
-  //     data: {
-  //       favorites:["a8bafbad-5f36-442c-b7ec-d22f73ef8f9a"]
-  //     },
-  //     success: function(res) {
-  //       console.log(res)
-  //     }
-  //   })
-  // },
-  getUserFavoritesLists:function(){
-    db.collection('user').where({_openid: app.globalData.openid}).get().then((res)=>{
-      this.setData({
-        favoritesLists: res.data[0].favorites
-      })
-    })
-  },
-  onGetUserInfo: function(e) {
-    if (!this.data.logged && e.detail.userInfo) {
-      this.setData({
-        logged: true,
-        avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo
-      })
-    }
-  },
-  updatePlaying:function (e) {
+  showSongLists:function(){
     this.setData({
-      detail: e.detail
+      componentShow:{
+        index:false,
+        bottomBar:true,
+        songsLists:true,
+        playing:false
+      },
     })
   },
-  backToIndex:function () {
+  toFavorites:function() {
+    this.showSongLists()
     this.setData({
-      indexShow:true,
-      songListsShow:false,
+      playingData: {
+        songLists: this.data.favoritesLists,
+        playingState: this.data.playingData.playingState,
+        cycleWay: this.data.playingData.cycleWay,
+        index: this.data.playingData.index,
+      },
     })
-  }
+    console.log(this.data.playingData.songLists)
+  },
+  toRecommend:function(e){
+    this.showSongLists()
+    this.setData({
+      playingData: {
+        songLists: this.data.recommendLists,
+        playingState: this.data.playingData.playingState,
+        cycleWay: this.data.playingData.cycleWay,
+        index: this.data.playingData.index,
+      },
+    })
+  },
+
+
+
+
 })
