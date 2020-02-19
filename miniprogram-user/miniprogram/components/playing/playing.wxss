@@ -44,7 +44,7 @@
 .container .main swiper swiper-item .rolling{
     width: 580rpx;
     height: 580rpx;
-    border-radius: 50%;
+    border-radius: 26rpx;
     border: solid #1d2124;
     border-top-color: #25292e;
     border-left-color: #2a2d33;
@@ -79,4 +79,12 @@
 .container .actions .actions-inner{
     width: 120rpx;
     height: 120rpx;
+}
+@keyframes spin{
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

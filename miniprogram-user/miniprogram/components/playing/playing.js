@@ -4,9 +4,10 @@ Component({
       type:Object
     }
   },
-  attached: function() {
+  attached: function () {
   },
   data: {
+    animation: ''
   },
   methods: {
     previous(){
@@ -18,5 +19,8 @@ Component({
     pause(){
       this.triggerEvent('PlayOrPause',{}, {capturePhase:true,bubbles: true, composed: true})
     },
-  }
+    backToIndex(){
+      this.triggerEvent('backToIndex', {}, {capturePhase:true,bubbles: true, composed: true})
+    },
+  },
 })

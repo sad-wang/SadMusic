@@ -9,7 +9,7 @@
     <view class="main">
         <swiper>
             <swiper-item>
-                <view class="rolling" style="background-image: url({{playingData.albumUrl}})">
+                <view class="rolling"   style="background-image: url({{playingData.albumUrl}});">
                 </view>
             </swiper-item>
             <swiper-item>
