@@ -5,10 +5,8 @@ Component({
     }
   },
   attached: function () {
-
   },
   data: {
-    animation: ''
   },
   methods: {
     previous(){

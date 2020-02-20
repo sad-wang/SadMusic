@@ -88,9 +88,23 @@ Page({
   },
   getUserFavoritesLists:function(){
     db.collection('user').where({_openid: app.globalData.openid}).get().then((res)=>{
-      this.setData({
-        favoritesLists: res.data[0].favorites
-      })
+      if(res.data==false){
+        db.collection('user').add({
+          data: {
+            favorites:[]
+          },
+          success: function(res) {
+            console.log(res)
+          }
+        })
+        this.setData({
+          favoritesLists: []
+        })
+      }else {
+        this.setData({
+          favoritesLists: res.data[0].favorites
+        })
+      }
     })
   },
   getRecommendLists:function(){
@@ -161,6 +175,25 @@ Page({
     })
   },
   playing(){
+    let song_id = this.data.playingData.songsData[this.data.playingData.index]._id
+    let favoritesLists = this.data.favoritesLists
+    let liked
+    if(favoritesLists.includes(song_id)){
+      liked = true
+    }else {
+      liked = false
+    }
+    this.setData({
+      playingData: {
+        songsData:this.data.playingData.songsData,
+        playingState: this.data.playingData.playingState,
+        cycleWay: this.data.playingData.cycleWay,
+        index: this.data.playingData.index,
+        albumUrl:this.data.playingData.albumUrl,
+        songUrl:this.data.playingData.songUrl,
+        liked:liked
+      }
+    })
     let song = this.data.playingData.songsData[this.data.playingData.index]
     audio.title = song.song_name
     audio.epname = song.album.name
@@ -227,18 +260,7 @@ Page({
     if (this.data.playingData.playingState){
       this.pause()
     }else {
-      audio.play()
-      this.setData({
-        playingData: {
-          songsData:this.data.playingData.songsData,
-          playingState: true,
-          cycleWay: this.data.playingData.cycleWay,
-          index: this.data.playingData.index,
-          albumUrl:this.data.playingData.albumUrl,
-          songUrl:this.data.playingData.songUrl,
-          liked:this.data.playingData.liked
-        }
-      })
+      this.playing()
     }
   },
   toPlaying(){
