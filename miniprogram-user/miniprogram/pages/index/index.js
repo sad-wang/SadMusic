@@ -29,7 +29,8 @@ Page({
       cycleWay: 'recyclePlay',
       index: 0,
       albumUrl:'',
-      songUrl:''
+      songUrl:'',
+      liked:false,
     }
   },
   onLoad: function() {
@@ -51,6 +52,7 @@ Page({
           index: (this.data.playingData.index+way[cycleWay])%this.data.playingData.songsData.length,
           albumUrl:this.data.playingData.albumUrl,
           songUrl:this.data.playingData.songUrl,
+          liked:this.data.playingData.liked
         }
       })
       this.playing()
@@ -145,6 +147,7 @@ Page({
         index: e.detail.index,
         albumUrl:this.data.playingData.albumUrl,
         songUrl:this.data.playingData.songUrl,
+        liked:this.data.playingData.liked
       }
     })
     this.playing()
@@ -171,6 +174,7 @@ Page({
           index: this.data.playingData.index,
           albumUrl: encodeURI(res.fileList[1].tempFileURL),
           songUrl: encodeURI(res.fileList[0].tempFileURL),
+          liked:this.data.playingData.liked
         }
       })
       audio.coverImgUrl = encodeURI(res.fileList[1].tempFileURL)
@@ -187,6 +191,7 @@ Page({
         index: this.data.playingData.index,
         albumUrl:this.data.playingData.albumUrl,
         songUrl:this.data.playingData.songUrl,
+        liked:this.data.playingData.liked
       }
     })
   },
@@ -199,6 +204,7 @@ Page({
         index: (this.data.playingData.index+1)%this.data.playingData.songsData.length,
         albumUrl:this.data.playingData.albumUrl,
         songUrl:this.data.playingData.songUrl,
+        liked:this.data.playingData.liked
       }
     })
     this.playing()
@@ -212,6 +218,7 @@ Page({
         index: (this.data.playingData.index - 1 + this.data.playingData.songsData.length) % this.data.playingData.songsData.length,
         albumUrl:this.data.playingData.albumUrl,
         songUrl:this.data.playingData.songUrl,
+        liked:this.data.playingData.liked
       }
     })
     this.playing()
@@ -229,6 +236,7 @@ Page({
           index: this.data.playingData.index,
           albumUrl:this.data.playingData.albumUrl,
           songUrl:this.data.playingData.songUrl,
+          liked:this.data.playingData.liked
         }
       })
     }
@@ -255,7 +263,43 @@ Page({
         index: this.data.playingData.index,
         albumUrl:this.data.playingData.albumUrl,
         songUrl:this.data.playingData.songUrl,
+        liked:this.data.playingData.liked
       }
+    })
+  },
+  updateFavorites(){
+    let song_id = this.data.playingData.songsData[this.data.playingData.index]._id
+    let favoritesLists = this.data.favoritesLists
+    let liked
+    if(favoritesLists.includes(song_id)){
+      favoritesLists.splice(favoritesLists.indexOf(song_id),1)
+      liked = false
+    }else {
+      favoritesLists.push(song_id)
+      liked = true
+    }
+    this.setData({
+      favoritesLists: favoritesLists,
+      playingData: {
+        songsData:this.data.playingData.songsData,
+        playingState: this.data.playingData.playingState,
+        cycleWay: this.data.playingData.cycleWay,
+        index: this.data.playingData.index,
+        albumUrl:this.data.playingData.albumUrl,
+        songUrl:this.data.playingData.songUrl,
+        liked:liked
+      }
+    })
+    db.collection('user').where({_openid: app.globalData.openid}).get().then(res=>{
+      db.collection('user').doc(res.data[0]._id).update({
+        data: {
+          favorites: this.data.favoritesLists
+        },
+      }).then((res)=>{
+        console.log(res)
+      },error=>{
+        console.log(error)
+      })
     })
   }
 })

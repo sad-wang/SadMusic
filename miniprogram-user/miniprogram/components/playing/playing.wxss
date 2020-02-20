@@ -80,11 +80,6 @@
     width: 120rpx;
     height: 120rpx;
 }
-@keyframes spin{
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.liked{
+    color: #e23c3c
 }

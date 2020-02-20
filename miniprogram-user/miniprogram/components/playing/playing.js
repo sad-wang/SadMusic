@@ -5,6 +5,7 @@ Component({
     }
   },
   attached: function () {
+
   },
   data: {
     animation: ''
@@ -24,6 +25,9 @@ Component({
     },
     changeCycleWay(){
       this.triggerEvent('changeCycleWay', {}, {capturePhase:true,bubbles: true, composed: true})
+    },
+    addToFavorites(){
+      this.triggerEvent('updateFavorites', {}, {capturePhase:true,bubbles: true, composed: true})
     }
   },
 })

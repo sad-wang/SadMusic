@@ -23,8 +23,8 @@
         <view class="icon-wrapper options-inner" bindtap="changeCycleWay">
             <view class="iconfont icon-{{playingData.cycleWay}} icon-style"></view>
         </view>
-        <view class="icon-wrapper options-inner">
-            <view class="iconfont icon-heart icon-style" style="color: #e23c3c"></view>
+        <view class="icon-wrapper options-inner" bindtap="addToFavorites">
+            <view class="iconfont icon-heart icon-style {{playingData.liked?'liked':''}}" ></view>
         </view>
         <view class="icon-wrapper options-inner">
             <view class="iconfont icon-list icon-style"></view>

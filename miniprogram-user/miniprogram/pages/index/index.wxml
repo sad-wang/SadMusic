@@ -5,6 +5,7 @@
       bind:next="next"
       bind:PlayOrPause="PlayOrPause"
       bind:changeCycleWay="changeCycleWay"
+      bind:updateFavorites="updateFavorites"
 >
   <view wx:if="{{index}}" class="container" >
   <view class="head">
