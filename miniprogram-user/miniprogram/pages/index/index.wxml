@@ -4,6 +4,7 @@
       bind:previous="previous"
       bind:next="next"
       bind:PlayOrPause="PlayOrPause"
+      bind:changeCycleWay="changeCycleWay"
 >
   <view wx:if="{{index}}" class="container" >
   <view class="head">

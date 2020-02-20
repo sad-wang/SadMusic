@@ -11,7 +11,6 @@ Component({
     subtitle: '',
     songLists: [],
     info: '',
-
     songsData: []
   },
   attached: function() {

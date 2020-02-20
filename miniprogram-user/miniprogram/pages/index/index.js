@@ -26,7 +26,7 @@ Page({
     playingData: {
       songsData: [],
       playingState: false,
-      cycleWay: '',
+      cycleWay: 'recyclePlay',
       index: 0,
       albumUrl:'',
       songUrl:''
@@ -36,6 +36,28 @@ Page({
     this.getKnownUserInfo()
     this.getRecommendLists()
     this.getUserFavoritesLists()
+    audio.onEnded(()=>{
+      let way = {
+        'recyclePlay':1,
+        'singlePlay': 0,
+        'randomPlay':Math.round(Math.random()*this.data.playingData.songsData.length)
+      }
+      let cycleWay = this.data.playingData.cycleWay
+      this.setData({
+        playingData: {
+          songsData:this.data.playingData.songsData,
+          playingState: this.data.playingData.playingState,
+          cycleWay: this.data.playingData.cycleWay,
+          index: (this.data.playingData.index+way[cycleWay])%this.data.playingData.songsData.length,
+          albumUrl:this.data.playingData.albumUrl,
+          songUrl:this.data.playingData.songUrl,
+        }
+      })
+      this.playing()
+    })
+    audio.onError(()=>{
+      this.next()
+    })
   },
   getKnownUserInfo:function() {
     wx.getSetting({
@@ -147,12 +169,12 @@ Page({
           playingState: true,
           cycleWay: this.data.playingData.cycleWay,
           index: this.data.playingData.index,
-          albumUrl: res.fileList[1].tempFileURL,
-          songUrl: res.fileList[0].tempFileURL,
+          albumUrl: encodeURI(res.fileList[1].tempFileURL),
+          songUrl: encodeURI(res.fileList[0].tempFileURL),
         }
       })
-      audio.coverImgUrl = res.fileList[1].tempFileURL
-      audio.src = res.fileList[0].tempFileURL
+      audio.coverImgUrl = encodeURI(res.fileList[1].tempFileURL)
+      audio.src = encodeURI(res.fileList[0].tempFileURL)
     })
   },
   pause(){
@@ -217,6 +239,23 @@ Page({
       songLists:false,
       playing:true,
       index:false,
+    })
+  },
+  changeCycleWay(){
+    let way = {
+      'recyclePlay':'singlePlay',
+      'singlePlay': 'randomPlay',
+      'randomPlay':'recyclePlay'
+    }
+    this.setData({
+      playingData: {
+        songsData:this.data.playingData.songsData,
+        playingState: this.data.playingData.playingState,
+        cycleWay: way[this.data.playingData.cycleWay],
+        index: this.data.playingData.index,
+        albumUrl:this.data.playingData.albumUrl,
+        songUrl:this.data.playingData.songUrl,
+      }
     })
   }
 })

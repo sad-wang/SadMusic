@@ -22,5 +22,8 @@ Component({
     backToIndex(){
       this.triggerEvent('backToIndex', {}, {capturePhase:true,bubbles: true, composed: true})
     },
+    changeCycleWay(){
+      this.triggerEvent('changeCycleWay', {}, {capturePhase:true,bubbles: true, composed: true})
+    }
   },
 })

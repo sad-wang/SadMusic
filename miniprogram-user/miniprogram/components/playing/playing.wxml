@@ -20,8 +20,8 @@
         <progress border-radius="15px" style="width: 100%" stroke-width="4" percent="60" backgroundColor="#25292e" color="#d5450b" ></progress>
     </view>
     <view class="options">
-        <view class="icon-wrapper options-inner">
-            <view class="iconfont icon-randomPlay icon-style"></view>
+        <view class="icon-wrapper options-inner" bindtap="changeCycleWay">
+            <view class="iconfont icon-{{playingData.cycleWay}} icon-style"></view>
         </view>
         <view class="icon-wrapper options-inner">
             <view class="iconfont icon-heart icon-style" style="color: #e23c3c"></view>
