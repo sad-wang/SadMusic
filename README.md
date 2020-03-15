@@ -1,6 +1,7 @@
 # SadMusic
 ![pc端](https://user-gold-cdn.xitu.io/2020/3/15/170dba7792007f99?w=1445&h=783&f=png&s=1109883)
-![IMG_0507.png](https://user-gold-cdn.xitu.io/2020/3/15/170dbbc28506e74d?w=311&h=552&f=png&s=50937)![小程序端](https://user-gold-cdn.xitu.io/2020/3/15/170dbbadc12ac0b1?w=311&h=552&f=png&s=128409)
+![IMG_0507.png](https://user-gold-cdn.xitu.io/2020/3/15/170dbbc28506e74d?w=311&h=552&f=png&s=50937)
+![小程序端](https://user-gold-cdn.xitu.io/2020/3/15/170dbbadc12ac0b1?w=311&h=552&f=png&s=128409)
 
 这是一个开源的音乐播放器项目
 ## 技术栈
