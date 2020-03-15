@@ -1,6 +1,6 @@
 # SadMusic
-![admin](https://user-gold-cdn.xitu.io/2020/3/15/170dba7792007f99?w=1445&h=783&f=png&s=1109883)
-![wx-program](https://user-gold-cdn.xitu.io/2020/3/15/170dba89568c7b51?w=1242&h=2208&f=png&s=1854584)
+![pc端](https://user-gold-cdn.xitu.io/2020/3/15/170dba7792007f99?w=1445&h=783&f=png&s=1109883)
+![小程序端](https://user-gold-cdn.xitu.io/2020/3/15/170dbbadc12ac0b1?w=311&h=552&f=png&s=128409)
 这是一个开源的音乐播放器项目
 ## 技术栈
 node.js + 七牛云 + leanCloud + 原生js + JQuery + 微信小程序 + 微信云开发
@@ -19,5 +19,7 @@ node server 9000
 cd pc-admin
 http-server -c-1
 ```
+小程序端
+体验版成员有限，暂不提供预览码，可自行克隆仓库通过微信开发平台预览。
 ## 未完待续
 pc管理端准备放弃 七牛云 和 leanCloud，转向微信云开发后台。
